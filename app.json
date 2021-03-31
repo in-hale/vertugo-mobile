@@ -1,0 +1,12 @@
+{
+  "name": "vertugo-mobile",
+  "displayName": "vertugo-mobile",
+  "expo": {
+    "name": "vertugo-mobile",
+    "slug": "vertugo-mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
