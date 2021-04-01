@@ -1,21 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Dimensions, View } from 'react-native';
+import Map from "../Map";
 
 const HomeMap = () => {
   return (
-    <View style={{
-      paddingBottom: 50,
-    }} >
-      <Text style={styles.text}>Map</Text>
+    <View style={styles.container}>
+      <Map />
     </View>
   );
 }
 
+let {height, width} = Dimensions.get('window')
 const styles = StyleSheet.create({
-  text: {
-    color: "#000",
-    fontSize: 55,
-    fontWeight: "bold"
+  container: {
+    height: height,
+    width: width,
   }
 });
 

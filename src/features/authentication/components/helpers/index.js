@@ -17,7 +17,7 @@ export const AuthenticationInput = ({ ...args }) => {
     height: 60,
     fontSize: 20,
     textAlign: 'left'
-  }} {...args} />
+  }} placeholderTextColor='#c7c7c7' {...args} />
 }
 
 export const AuthenticationFooter = ({ children, label, title, onPress }) => {
