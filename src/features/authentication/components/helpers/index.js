@@ -58,3 +58,17 @@ export const AuthenticationButton = ({ title, onPress }) => {
     </TouchableOpacity>
   </View>
 }
+
+export const AuthenticationError = ({ title }) => {
+  return <Text style={{
+    color: 'red',
+    paddingBottom: 15
+  }}>
+    { title }
+  </Text>
+}
+
+export const AuthenticationPasswordInput = ({ ...args }) => {
+  return <AuthenticationInput secureTextEntry={ true } {...args} />
+}
+

@@ -1,26 +1,18 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { connect } from 'react-redux'
 import { NavigationContainer } from "@react-navigation/native";
 
-import LogoScreen from "../components/LogoScreen";
-import SignUp from "../features/authentication/components/SignUp";
-import SignIn from "../features/authentication/components/SignIn";
+import AuthTabs from "./AuthTabs";
+import AppTabs from "./AppTabs";
 
-const Stack = createStackNavigator();
+const Routes = ({ isAuthenticated }) => {
+  return <NavigationContainer>
+    { isAuthenticated ? <AppTabs /> : <AuthTabs /> }
+  </NavigationContainer>
+}
 
-export const Routes = ({}) => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator headerMode='none' screenOptions={{
-        headerShown: false,
-        gestureEnabled: false
-      }}>
-        <Stack.Screen name="LogoScreen" component={LogoScreen} />
-        <Stack.Screen name="SignIn" component={SignIn} options={{
-          animationEnabled: false
-        }} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+const mapStateToProps = state => ({
+  isAuthenticated: state.authentication.active
+})
+
+export default connect(mapStateToProps)(Routes);

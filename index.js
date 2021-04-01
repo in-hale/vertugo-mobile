@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { enableScreens } from "react-native-screens";
 
 import myStore from "./src/Store";
-import { Routes } from "./src/navigation/routes";
+import Routes from "./src/navigation/routes";
 
 enableScreens();
 

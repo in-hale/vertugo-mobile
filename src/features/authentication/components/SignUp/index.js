@@ -3,7 +3,13 @@ import { View } from "react-native";
 
 import PageView from "../../../../components/PageView";
 import Logo from "../../../../components/Logo";
-import { AuthenticationView, AuthenticationInput, AuthenticationButton, AuthenticationFooter } from '../helpers'
+import {
+  AuthenticationView,
+  AuthenticationInput,
+  AuthenticationButton,
+  AuthenticationFooter,
+  AuthenticationPasswordInput
+} from '../helpers'
 
 const SignUp = ({ navigation }) => {
   return (
@@ -15,8 +21,8 @@ const SignUp = ({ navigation }) => {
         }}>
           <AuthenticationInput placeholder="Login" />
           <AuthenticationInput placeholder="Email" />
-          <AuthenticationInput placeholder="Password" />
-          <AuthenticationInput placeholder="Repeat password" />
+          <AuthenticationPasswordInput placeholder="Password" />
+          <AuthenticationPasswordInput placeholder="Repeat password" />
           <AuthenticationButton title='Sign up' onPress={() => {}} />
           <AuthenticationFooter label="Already have an account?"
                                 title='Sign in'

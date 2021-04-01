@@ -1,9 +1,7 @@
 import { combineReducers } from "redux";
 
-
-
-let a = (store = {}, _) => { return store };
+import authentication from "../features/authentication/reducers/authentication.reducer";
 
 export default combineReducers({
-  a,
+  authentication,
 });
