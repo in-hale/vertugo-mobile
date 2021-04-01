@@ -1,9 +1,12 @@
 import { registerRootComponent } from 'expo';
 import React from "react";
 import { Provider } from "react-redux";
+import { enableScreens } from "react-native-screens";
 
 import myStore from "./src/Store";
 import { Routes } from "./src/navigation/routes";
+
+enableScreens();
 
 const Root = () => {
   return (
@@ -11,7 +14,7 @@ const Root = () => {
       <Routes/>
     </Provider>
   );
-}
+};
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in the Expo client or in a native build,

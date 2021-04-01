@@ -7,7 +7,7 @@ const LogoScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('SignIn')
-    }, 2000)
+    }, 1500)
   }, [])
 
   return (
@@ -22,7 +22,6 @@ const LogoScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ddd',
     alignItems: 'center',
     justifyContent: 'center',
   }
