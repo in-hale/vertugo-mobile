@@ -39,7 +39,7 @@ const SignIn = ({ navigation, loginUser, error }) => {
 }
 
 const mapStateToProps = (state) => ({
-  error: state.authentication.error
+  error: state.authentication.signInError
 })
 
 const mapDispatchToProps = (dispatch) => ({

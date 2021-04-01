@@ -1,4 +1,4 @@
-import { USER_SIGN_OUT, USER_APPLY, ADD_AUTH_ERROR } from '../actions/authentication.actions'
+import { USER_SIGN_OUT, USER_APPLY, ADD_SIGN_IN_ERROR, ADD_SIGN_UP_ERROR } from '../actions/authentication.actions'
 
 const initialState = {
   active: false,
@@ -19,10 +19,14 @@ const authReducer = (state = initialState, action) => {
         active: false,
       }
     }
-    case ADD_AUTH_ERROR: {
-      const { error } = action.payload
+    case ADD_SIGN_IN_ERROR: {
       return {
-        error
+        signInError: action.payload.error
+      }
+    }
+    case ADD_SIGN_UP_ERROR: {
+      return {
+        signUpError: action.payload.error
       }
     }
     default: {
