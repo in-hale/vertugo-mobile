@@ -1,18 +1,14 @@
 import React from "react";
-import PageView from "../../../../components/PageView";
-import { KeyboardAvoidingView, View} from "react-native";
-import Logo from "../../../../components/Logo";
+import { View } from "react-native";
 
-import { AuthenticationInput, AuthenticationButton, AuthenticationFooter } from '../helpers'
+import PageView from "../../../../components/PageView";
+import Logo from "../../../../components/Logo";
+import { AuthenticationView, AuthenticationInput, AuthenticationButton, AuthenticationFooter } from '../helpers'
 
 const SignUp = ({ navigation }) => {
   return (
     <PageView>
-      <KeyboardAvoidingView behavior='padding' style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <AuthenticationView>
         <Logo />
         <View style={{
           width: '80%'
@@ -26,7 +22,7 @@ const SignUp = ({ navigation }) => {
                                 title='Sign in'
                                 onPress={() => {navigation.navigate('SignIn')}} />
         </View>
-      </KeyboardAvoidingView>
+      </AuthenticationView>
     </PageView>
   );
 }

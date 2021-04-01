@@ -3,7 +3,7 @@ import {Keyboard, StyleSheet, TouchableWithoutFeedback, View} from 'react-native
 
 const PageView = ({ children }) => {
   return (
-    <View style={styles.container} onPress={Keyboard.dismiss}>
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         {children}
       </TouchableWithoutFeedback>

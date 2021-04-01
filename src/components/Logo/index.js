@@ -3,7 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const Logo = () => {
   return (
-    <Text style={styles.text}>Vertugo</Text>
+    <View style={{
+      paddingBottom: 50,
+    }} >
+      <Text style={styles.text}>Vertugo</Text>
+    </View>
   );
 }
 

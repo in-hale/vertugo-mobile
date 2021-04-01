@@ -1,5 +1,16 @@
-import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {Button, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React from "react";
+
+export const AuthenticationView = ({ children }) => {
+  return <KeyboardAvoidingView behavior='padding' style={{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 100
+  }}>
+    { children }
+  </KeyboardAvoidingView>
+}
 
 export const AuthenticationInput = ({ ...args }) => {
   return <TextInput style={{
