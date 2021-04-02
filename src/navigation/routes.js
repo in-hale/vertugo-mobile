@@ -7,7 +7,7 @@ import AppTabs from "./AppTabs";
 
 const Routes = ({ isAuthenticated }) => {
   return <NavigationContainer>
-    { !isAuthenticated ? <AppTabs /> : <AuthTabs /> }
+    { isAuthenticated ? <AppTabs /> : <AuthTabs /> }
   </NavigationContainer>
 }
 

@@ -4,13 +4,24 @@ import MapView from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
 
 const Map = () => {
+  const map = useRef(null);
+
   const getCurrentLocation = () => {
     return new Promise((resolve, reject) => {
       Geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
     });
   };
 
-  const map = useRef(null);
+  const zoomToLocation = position => {
+    if (position) {
+      map.current.animateToRegion({
+        latitude: parseFloat(position.coords.latitude),
+        longitude: parseFloat(position.coords.longitude),
+        latitudeDelta: 0.15,
+        longitudeDelta: 0.15
+      })
+    }
+  }
 
   return (
     <MapView
@@ -18,16 +29,7 @@ const Map = () => {
       showsUserLocation
       ref={map}
       onMapReady={() => {
-        getCurrentLocation().then(position => {
-          if (position) {
-            map.current.animateToRegion({
-              latitude: parseFloat(position.coords.latitude),
-              longitude: parseFloat(position.coords.longitude),
-              latitudeDelta: 0.15,
-              longitudeDelta: 0.15
-            })
-          }
-        })
+        getCurrentLocation().then(zoomToLocation)
       }}
       initialRegion={{
         latitude: 53.908200,
