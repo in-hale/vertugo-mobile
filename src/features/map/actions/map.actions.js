@@ -9,7 +9,10 @@ export const previewPlace = (id) => dispatch => {
       id: 1,
       rating: 4.5,
       name: "McDonald's",
-      images: [],
+      images: [
+        'https://i0.wp.com/www.eatthis.com/wp-content/uploads/2020/10/mcdonalds-exterior.jpg?resize=1250%2C702&ssl=1',
+        'https://www.marconfitout.com/wp-content/uploads/2014/10/McDonalds-Glenmachen-Street-1.jpg'
+      ],
       reviewCount: 10,
       reviews: [],
       mealCategories: [

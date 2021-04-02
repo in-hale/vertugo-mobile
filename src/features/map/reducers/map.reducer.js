@@ -2,13 +2,13 @@ import { MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW } from "../actions/map.actions";
 
 const initialState = {
   isPreviewActive: false,
-  previewedPlace: {},
+  // previewedPlace: {},
   overviewPins: [
     {
       id: 1,
       location: {
-        latitude: 53.908200,
-        longitude: 27.558230
+        latitude: 53.954781,
+        longitude: 27.619631
       }
     }
   ]
