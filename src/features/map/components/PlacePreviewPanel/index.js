@@ -4,6 +4,7 @@ import {Text, View, StyleSheet, Dimensions} from "react-native";
 import PropTypes from 'prop-types'
 import Swiper from 'react-native-swiper';
 import { Rating, Image } from 'react-native-elements';
+import Star from "../Star";
 
 const { width } = Dimensions.get('window')
 
@@ -27,9 +28,12 @@ const PlacePreviewPanel = ({ isActive, onClose, place }) => {
         }
       </Swiper>
       <View style={styles.contentView}>
-        <Text style={styles.placeNameText}>
-          {place.name}
-        </Text>
+        <View style={styles.placeNameContainer}>
+          <Text style={styles.placeNameText}>
+            {place.name}
+          </Text>
+          <Star active={place.isStarred} style={styles.star} />
+        </View>
         <PlaceRating rating={place.rating} />
       </View>
     </SwipeablePanel>
@@ -55,6 +59,11 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: 'flex-start'
   },
+  placeNameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%'
+  },
   placeNameText: {
     fontSize: 25,
     fontWeight: "bold"
@@ -70,6 +79,10 @@ const styles = StyleSheet.create({
     top: 2,
     left: 5,
     fontSize: 20
+  },
+  star: {
+    position: 'absolute',
+    right: 0
   }
 })
 
@@ -79,7 +92,8 @@ PlacePreviewPanel.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     rating: PropTypes.number,
-    images: PropTypes.array
+    images: PropTypes.array,
+    isStarred: PropTypes.bool
   })
 }
 
@@ -89,7 +103,8 @@ PlacePreviewPanel.defaultProps = {
     id: null,
     name: '',
     rating: 0,
-    images: []
+    images: [],
+    isStarred: false
   }
 }
 

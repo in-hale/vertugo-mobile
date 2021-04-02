@@ -16,6 +16,7 @@ export const previewPlace = (id) => dispatch => {
         ],
         reviewCount: 10,
         reviews: [],
+        isStarred: true,
         mealCategories: [
           {
             id: 1,
@@ -46,6 +47,7 @@ export const previewPlace = (id) => dispatch => {
         ],
         reviewCount: 10,
         reviews: [],
+        isStarred: false,
         mealCategories: [
           {
             id: 1,
