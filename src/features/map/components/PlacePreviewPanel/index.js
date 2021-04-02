@@ -1,10 +1,18 @@
 import React from 'react';
 import { SwipeablePanel } from 'rn-swipeable-panel';
-import {Text, View, StyleSheet, Image, Dimensions} from "react-native";
+import {Text, View, StyleSheet, Dimensions} from "react-native";
 import PropTypes from 'prop-types'
 import Swiper from 'react-native-swiper';
+import { Rating, Image } from 'react-native-elements';
 
 const { width } = Dimensions.get('window')
+
+const PlaceRating = ({ rating }) => (
+  <View style={styles.ratingContainer}>
+    <Rating style={styles.rating} readonly startingValue={rating} imageSize={25} />
+    <Text style={styles.ratingText}>({rating})</Text>
+  </View>
+)
 
 const PlacePreviewPanel = ({ isActive, onClose, place }) => {
   return (
@@ -22,6 +30,7 @@ const PlacePreviewPanel = ({ isActive, onClose, place }) => {
         <Text style={styles.placeNameText}>
           {place.name}
         </Text>
+        <PlaceRating rating={place.rating} />
       </View>
     </SwipeablePanel>
   );
@@ -29,7 +38,7 @@ const PlacePreviewPanel = ({ isActive, onClose, place }) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 175
+    height: 200
   },
   slide: {
     flex: 1,
@@ -43,13 +52,24 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   contentView: {
-    borderColor: 'black',
-    borderWidth: 1,
-    margin: 10
+    margin: 10,
+    alignItems: 'flex-start'
   },
   placeNameText: {
     fontSize: 25,
     fontWeight: "bold"
+  },
+  rating: {
+    paddingTop: 5,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  ratingText: {
+    top: 2,
+    left: 5,
+    fontSize: 20
   }
 })
 
