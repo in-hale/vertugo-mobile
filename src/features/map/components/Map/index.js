@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import MapView from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
 
-const Map = () => {
+const Map = ({ children }) => {
   const map = useRef(null);
 
   const getCurrentLocation = () => {
@@ -17,9 +17,9 @@ const Map = () => {
       map.current.animateToRegion({
         latitude: parseFloat(position.coords.latitude),
         longitude: parseFloat(position.coords.longitude),
-        latitudeDelta: 0.15,
-        longitudeDelta: 0.15
-      })
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.02
+      }, 1000)
     }
   }
 
@@ -29,7 +29,7 @@ const Map = () => {
       showsUserLocation
       ref={map}
       onMapReady={() => {
-        getCurrentLocation().then(zoomToLocation)
+        getCurrentLocation().then(zoomToLocation, () => {})
       }}
       initialRegion={{
         latitude: 53.908200,
@@ -37,7 +37,9 @@ const Map = () => {
         latitudeDelta: 0.35,
         longitudeDelta: 0.0421,
       }}
-    />
+    >
+      { children }
+    </MapView>
   );
 }
 
