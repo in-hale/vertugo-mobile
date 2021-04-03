@@ -2,11 +2,12 @@ import React from "react";
 import { connect } from 'react-redux'
 import { NavigationContainer } from "@react-navigation/native";
 
+import { navigationRef } from './rootNavigation';
 import AuthTabs from "./AuthTabs";
 import AppTabs from "./AppTabs";
 
 const Routes = ({ isAuthenticated }) => {
-  return <NavigationContainer>
+  return <NavigationContainer ref={navigationRef}>
     { !isAuthenticated ? <AppTabs /> : <AuthTabs /> }
   </NavigationContainer>
 }

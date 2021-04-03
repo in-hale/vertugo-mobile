@@ -1,34 +1,18 @@
 import React from 'react';
 import { SwipeablePanel } from 'rn-swipeable-panel';
-import {Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
+import {Text, View, StyleSheet, TouchableWithoutFeedback} from "react-native";
 import PropTypes from 'prop-types'
-import Swiper from 'react-native-swiper';
-import { Rating, Image } from 'react-native-elements';
 import LikeButton from "../LikeButton";
-
-const { width } = Dimensions.get('window')
-
-const PlaceRating = ({ rating, reviewCount }) => (
-  <View style={styles.ratingContainer}>
-    <Rating style={styles.rating} readonly startingValue={rating} imageSize={25} />
-    <Text style={styles.ratingText}>({reviewCount})</Text>
-  </View>
-)
+import ImageSlider from "../ImageSlider";
+import PlaceRating from "../PlaceRating";
+import {backgroundColor} from "../../../../styles";
 
 const PlacePreviewPanel = ({ isActive, onClose, place, onPress }) => {
   return (
-    <SwipeablePanel scrollViewProps={{
+    <SwipeablePanel style={styles.panel} scrollViewProps={{
       scrollEnabled: false
     }} noBar allowTouchOutside onlySmall fullWidth isActive={isActive} onClose={onClose}>
-      <Swiper scrollEnabled={false} removeClippedSubviews={false} style={styles.wrapper} showsButtons showsPagination={false}  >
-        {
-          place.images.map(imageUrl => (
-            <View style={styles.slide} key={imageUrl}>
-              <Image style={styles.image} source={{ uri: imageUrl }} />
-            </View>
-          ))
-        }
-      </Swiper>
+      <ImageSlider images={place.images} />
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.contentView}>
           <View style={styles.placeNameContainer}>
@@ -45,23 +29,13 @@ const PlacePreviewPanel = ({ isActive, onClose, place, onPress }) => {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: 200
-  },
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black'
-  },
-  image: {
-    flex: 1,
-    width,
-    height: '100%'
+  panel: {
+    backgroundColor: backgroundColor
   },
   contentView: {
     margin: 10,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    backgroundColor: backgroundColor
   },
   placeNameContainer: {
     flexDirection: 'row',
@@ -71,18 +45,6 @@ const styles = StyleSheet.create({
   placeNameText: {
     fontSize: 25,
     fontWeight: "bold"
-  },
-  rating: {
-    paddingTop: 5,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  ratingText: {
-    top: 2,
-    left: 5,
-    fontSize: 20
   },
   star: {
     position: 'absolute',

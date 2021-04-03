@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import MapPin from "../MapPin";
 import Map from "../Map";
 import PlacePreviewPanel from "../PlacePreviewPanel";
-import { previewPlace, closePreview, loadOverviewPins } from "../../actions/map.actions"
+import { previewPlace, closePreview, loadOverviewPins, viewPlace } from "../../actions/map.actions"
 import PressableIcon from "../../../../components/PressableIcon";
 
 const OverlayIcons = ({ children }) => {
@@ -39,7 +39,7 @@ const OverlayIcons = ({ children }) => {
   );
 };
 
-const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad }) => {
+const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView }) => {
   useEffect(overviewPinsLoad, []);
 
   return (
@@ -49,7 +49,7 @@ const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, pl
             <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />
         )}
       </Map>
-      <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { navigation.navigate('PlaceView') }} />
+      <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { placeView(previewedPlace.id) }} />
       <OverlayIcons>
         <PressableIcon name='menu' onPress={() => { navigation.openDrawer() }} />
         <PressableIcon name='filter' onPress={() => { navigation.navigate('Filters') }} />
@@ -90,7 +90,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   placePreview: (id) => dispatch(previewPlace(id)),
   previewClose: () => dispatch(closePreview()),
-  overviewPinsLoad: () => dispatch(loadOverviewPins())
+  overviewPinsLoad: () => dispatch(loadOverviewPins()),
+  placeView: (id) => dispatch(viewPlace(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeMap);

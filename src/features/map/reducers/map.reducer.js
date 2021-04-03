@@ -1,4 +1,4 @@
-import {MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW, LOAD_OVERVIEW_PINS} from "../actions/map.actions";
+import {MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW, LOAD_OVERVIEW_PINS, VIEW_PLACE} from "../actions/map.actions";
 
 const initialState = {}
 
@@ -34,6 +34,12 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         overviewPins: action.payload.overviewPins
+      }
+    }
+    case VIEW_PLACE: {
+      return {
+        ...state,
+        viewedPlace: action.payload,
       }
     }
     default: {

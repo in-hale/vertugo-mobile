@@ -1,12 +1,12 @@
 import React from 'react';
-import {Keyboard, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { backgroundColor } from "../../styles";
 
 const PageView = ({ children }) => {
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        {children}
-      </TouchableWithoutFeedback>
+      { children }
     </View>
   );
 };
@@ -14,7 +14,7 @@ const PageView = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e6e6e6'
+    backgroundColor: backgroundColor
   }
 });
 

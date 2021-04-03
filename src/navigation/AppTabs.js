@@ -7,6 +7,7 @@ import PlaceView from "../features/map/components/PlaceView";
 import Filters from "../features/map/components/Filters";
 import LikedPlaces from "../features/map/components/LikedPlaces";
 import SideMenu from "../features/map/components/SideMenu";
+import { backgroundColor } from "../styles";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,7 +23,10 @@ const DrawerNavigator = () => {
 const AppTabs = () => {
   return <Stack.Navigator screenOptions={{
     headerShown: true,
-    gestureEnabled: true
+    gestureEnabled: true,
+    headerStyle: {
+      backgroundColor: backgroundColor
+    }
   }}>
     <Stack.Screen name="HomeMap" component={DrawerNavigator} options={{
       headerShown: false

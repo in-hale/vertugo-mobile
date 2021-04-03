@@ -26,10 +26,10 @@ const SideMenu = ({ navigation }) => {
         <View style={styles.menuView}>
           <MenuItem title='Filters' icon='filter' onPress={() => { navigation.navigate('Filters') } } />
           <MenuItem title='Favourites' icon='heart' onPress={() => { navigation.navigate('Liked places') } } />
-          <MenuItem title='Filters' style={{
+          <MenuItem title='Log out' style={{
             position: 'absolute',
             bottom: 20
-          }} icon='filter' onPress={() => { navigation.navigate('Filters') } } />
+          }} icon='logout' onPress={() => { navigation.navigate('Filters') } } />
         </View>
       </View>
     </PageView>

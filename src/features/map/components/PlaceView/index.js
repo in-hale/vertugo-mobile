@@ -1,14 +1,17 @@
 import React from 'react';
+import { connect } from "react-redux";
 import PageView from "../../../../components/PageView";
-import Logo from "../../../../components/Logo"
-import {StyleSheet, View} from "react-native";
+import {ScrollView, StyleSheet, View} from "react-native";
+import ImageSlider from "../ImageSlider";
+import PlaceRating from "../PlaceRating";
 
-const PlaceView = () => {
+const PlaceView = ({ place }) => {
   return (
     <PageView>
-      <View style={styles.container}>
-        <Logo />
-      </View>
+      <ScrollView>
+        <ImageSlider images={place.images} />
+        <PlaceRating reviewCount={place.reviewCount} rating={place.rating} />
+      </ScrollView>
     </PageView>
   );
 }
@@ -21,4 +24,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PlaceView;
+const mapStateToProps = state => ({
+  place: state.map.viewedPlace
+})
+
+export default connect(mapStateToProps)(PlaceView);
