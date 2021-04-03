@@ -3,7 +3,7 @@ import PageView from "../../../../components/PageView";
 import Logo from "../../../../components/Logo"
 import {StyleSheet, View} from "react-native";
 
-const PlaceView = () => {
+const LikedPlaces = () => {
   return (
     <PageView>
       <View style={styles.container}>
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PlaceView;
+export default LikedPlaces;

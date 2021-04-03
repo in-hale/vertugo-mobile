@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback} from "reac
 import PropTypes from 'prop-types'
 import Swiper from 'react-native-swiper';
 import { Rating, Image } from 'react-native-elements';
-import Star from "../Star";
+import LikeButton from "../LikeButton";
 
 const { width } = Dimensions.get('window')
 
@@ -35,7 +35,7 @@ const PlacePreviewPanel = ({ isActive, onClose, place, onPress }) => {
             <Text style={styles.placeNameText}>
               {place.name}
             </Text>
-            <Star active={place.isStarred} style={styles.star} onPress={() => { alert('kek') }} />
+            <LikeButton active={place.isStarred} style={styles.star} onPress={() => { alert('kek') }} />
           </View>
           <PlaceRating rating={place.rating} reviewCount={place.reviewCount} />
         </View>

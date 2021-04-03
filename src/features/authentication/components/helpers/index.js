@@ -1,8 +1,8 @@
 import {Button, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React from "react";
 
-export const AuthenticationView = ({ children }) => {
-  return <KeyboardAvoidingView behavior='padding' style={{
+export const AuthenticationView = ({ children }) => (
+  <KeyboardAvoidingView behavior='padding' style={{
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -10,18 +10,18 @@ export const AuthenticationView = ({ children }) => {
   }}>
     { children }
   </KeyboardAvoidingView>
-}
+)
 
-export const AuthenticationInput = ({ ...args }) => {
-  return <TextInput style={{
+export const AuthenticationInput = ({ ...args }) => (
+  <TextInput style={{
     height: 60,
     fontSize: 20,
     textAlign: 'left'
   }} placeholderTextColor='#c7c7c7' {...args} />
-}
+)
 
-export const AuthenticationFooter = ({ children, label, title, onPress }) => {
-  return <View style={{
+export const AuthenticationFooter = ({ children, label, title, onPress }) => (
+  <View style={{
     alignItems: 'flex-end',
     width: '80%',
     alignSelf: 'center'
@@ -35,10 +35,10 @@ export const AuthenticationFooter = ({ children, label, title, onPress }) => {
       {children}
     </View>
   </View>
-}
+)
 
-export const AuthenticationButton = ({ title, onPress }) => {
-  return <View style={{
+export const AuthenticationButton = ({ title, onPress }) => (
+  <View style={{
     alignItems: 'center'
   }} >
     <TouchableOpacity onPress={onPress} style={{
@@ -57,18 +57,17 @@ export const AuthenticationButton = ({ title, onPress }) => {
       </Text>
     </TouchableOpacity>
   </View>
-}
+)
 
-export const AuthenticationError = ({ title }) => {
-  return <Text style={{
+export const AuthenticationError = ({ title }) => (
+  <Text style={{
     color: 'red',
     paddingBottom: 15
   }}>
     { title }
   </Text>
-}
+)
 
-export const AuthenticationPasswordInput = ({ ...args }) => {
-  return <AuthenticationInput secureTextEntry={ true } {...args} />
-}
-
+export const AuthenticationPasswordInput = ({ ...args }) => (
+  <AuthenticationInput secureTextEntry {...args} />
+)

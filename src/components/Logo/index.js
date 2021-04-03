@@ -1,11 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Logo = () => {
+const Logo = ({ style }) => {
   return (
-    <View style={{
-      paddingBottom: 50,
-    }} >
+    <View style={style} >
       <Text style={styles.text}>Vertugo</Text>
     </View>
   );

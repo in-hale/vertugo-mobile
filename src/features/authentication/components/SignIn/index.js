@@ -21,10 +21,8 @@ const SignIn = ({ navigation, loginUser, error }) => {
   return (
     <PageView>
       <AuthenticationView>
-        <Logo />
-        <View style={{
-          width: '80%'
-        }}>
+        <Logo style={{ paddingBottom: 50 }} />
+        <View style={{ width: '80%' }}>
           <AuthenticationInput placeholder="Login" onChangeText={setLogin} value={login} />
           <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} />
           <AuthenticationError title={error} />

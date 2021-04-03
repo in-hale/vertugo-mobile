@@ -7,22 +7,53 @@ import MapPin from "../MapPin";
 import Map from "../Map";
 import PlacePreviewPanel from "../PlacePreviewPanel";
 import { previewPlace, closePreview, loadOverviewPins } from "../../actions/map.actions"
+import PressableIcon from "../../../../components/PressableIcon";
+
+const OverlayIcons = ({ children }) => {
+  const xOffset = 15;
+  const yOffset = 50;
+
+  const sharedIconProps = {
+    size: 40,
+    color: 'black',
+    style: {
+      paddingBottom: 10
+    }
+  }
+
+  return (
+    <View style={{
+      position: 'absolute',
+      flexDirection: 'column',
+      top: yOffset,
+      left: xOffset
+    }} >
+      {
+        children.map(child => React.cloneElement(child, {
+          key: child.props.name,
+          ...sharedIconProps,
+          ...child.props
+        }))
+      }
+    </View>
+  );
+};
 
 const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad }) => {
-  useEffect(overviewPinsLoad, [])
+  useEffect(overviewPinsLoad, []);
 
   return (
     <View style={styles.container}>
       <Map>
-        {
-          overviewPins.map(pin =>
-            (
-              <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />
-            )
-          )
-        }
+        {overviewPins.map(pin =>
+            <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />
+        )}
       </Map>
       <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { navigation.navigate('PlaceView') }} />
+      <OverlayIcons>
+        <PressableIcon name='menu' onPress={() => { navigation.openDrawer() }} />
+        <PressableIcon name='filter' onPress={() => { navigation.navigate('Filters') }} />
+      </OverlayIcons>
     </View>
   );
 }
