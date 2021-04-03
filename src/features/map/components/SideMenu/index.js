@@ -1,42 +1,68 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Button, ScrollView, Text, View} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Logo from "../../../../components/Logo";
+import SideMenuUserInfo from "../SideMenuUserInfo";
+import PageView from "../../../../components/PageView";
+import { Icon } from "react-native-elements";
+
+const MenuItem = ({ title, icon, style, onPress }) => {
+  return (
+    <TouchableOpacity style={{ ...styles.menuItem, ...style }} onPress={onPress}>
+      <Icon name={icon} type='material-community' size={35} />
+      <Text style={styles.menuItemText}>{title}</Text>
+    </TouchableOpacity>
+  )
+}
 
 const SideMenu = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Logo style={{ alignSelf: 'center', marginTop: 15 }} />
+    <PageView>
+      <View style={styles.container}>
+        <Logo style={{ alignSelf: 'center', marginTop: 15 }} />
 
-      <ScrollView>
-        <Button title='Filters' onPress={() => { navigation.navigate('Filters') } } />
-        <Button title='Liked places' onPress={() => { navigation.navigate('Liked places') } } />
-      </ScrollView>
-      <View style={styles.footerContainer}>
-        <Text>Log out</Text>
+        <SideMenuUserInfo />
+
+        <View style={styles.menuView}>
+          <MenuItem title='Filters' icon='filter' onPress={() => { navigation.navigate('Filters') } } />
+          <MenuItem title='Favourites' icon='heart' onPress={() => { navigation.navigate('Liked places') } } />
+          <MenuItem title='Filters' style={{
+            position: 'absolute',
+            bottom: 20
+          }} icon='filter' onPress={() => { navigation.navigate('Filters') } } />
+        </View>
       </View>
-    </View>
+    </PageView>
   );
 }
 
 const styles = {
   container: {
     paddingTop: 20,
-    flex: 1
+    flex: 1,
+    alignItems: 'flex-start',
+    // margin: 10
   },
-  navItemStyle: {
-    padding: 10
+  menuView: {
+    width: '100%',
+    flexGrow: 1,
+    marginTop: 35,
   },
-  navSectionStyle: {
-    backgroundColor: 'lightgrey'
+  userIconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
-  sectionHeadingStyle: {
-    paddingVertical: 10,
-    paddingHorizontal: 5
+  menuItem: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    paddingLeft: 15,
+    paddingBottom: 15,
   },
-  footerContainer: {
-    padding: 20,
-    backgroundColor: 'lightgrey'
+  menuItemText: {
+    fontSize: 20,
+    paddingLeft: 10,
+    fontWeight: '600'
   }
 };
 

@@ -14,7 +14,7 @@ const PageView = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ebeef2'
+    backgroundColor: '#e6e6e6'
   }
 });
 

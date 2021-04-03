@@ -2,6 +2,9 @@ import { USER_SIGN_OUT, USER_APPLY, ADD_SIGN_IN_ERROR, ADD_SIGN_UP_ERROR } from 
 
 const initialState = {
   active: false,
+  // TODO: Remove
+  login: 'loginlogin123',
+  email: 'emailemail@gmail.com'
 }
 
 const authReducer = (state = initialState, action) => {
