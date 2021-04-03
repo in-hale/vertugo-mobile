@@ -1,6 +1,8 @@
 import {MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW, LOAD_OVERVIEW_PINS, VIEW_PLACE} from "../actions/map.actions";
 
-const initialState = {}
+const initialState = {
+  viewedPlace: { name: 'kek'}
+}
 
 const mapReducer = (state = initialState, action) => {
   switch (action.type) {

@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
@@ -8,6 +9,7 @@ import Filters from "../features/map/components/Filters";
 import LikedPlaces from "../features/map/components/LikedPlaces";
 import SideMenu from "../features/map/components/SideMenu";
 import { backgroundColor } from "../styles";
+import LikeButton from "../features/map/components/LikeButton";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -20,7 +22,7 @@ const DrawerNavigator = () => {
   );
 }
 
-const AppTabs = () => {
+const AppTabs = ({ viewedPlaceName, viewedPlaceIsStarred }) => {
   return <Stack.Navigator screenOptions={{
     headerShown: true,
     gestureEnabled: true,
@@ -31,10 +33,21 @@ const AppTabs = () => {
     <Stack.Screen name="HomeMap" component={DrawerNavigator} options={{
       headerShown: false
     }} />
-    <Stack.Screen name="PlaceView" component={PlaceView} />
+    <Stack.Screen name="PlaceView" options={{
+      headerTitle: viewedPlaceName,
+      headerRight: () => <LikeButton active={viewedPlaceIsStarred} />,
+      headerRightContainerStyle: {
+        right: 7
+      }
+    }} component={PlaceView} />
     <Stack.Screen name="Filters" component={Filters} />
     <Stack.Screen name="Liked places" component={LikedPlaces} />
   </Stack.Navigator>
-}
+};
 
-export default AppTabs;
+const mapStateToProps = state => ({
+  viewedPlaceName: state.map.viewedPlace.name,
+  viewedPlaceIsStarred: state.map.viewedPlace.isStarred
+})
+
+export default connect(mapStateToProps)(AppTabs);
