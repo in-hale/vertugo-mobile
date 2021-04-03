@@ -1,13 +1,15 @@
 import React from "react";
 import { Icon } from "react-native-elements";
-import {View} from "react-native";
+import {TouchableWithoutFeedback, View} from "react-native";
 
-const Star = ({ active, ...args }) => {
-  const iconName = active ? 'star' : 'star-o'
+const Star = ({ active, onPress, ...args }) => {
+  const iconName = active ? 'heart' : 'heart-outline'
 
-  return <View {...args}>
-    <Icon type='font-awesome' name={iconName} color='#f1c40f' size={30} />
-  </View>
+  return <TouchableWithoutFeedback onPress={onPress}>
+    <View {...args}>
+      <Icon type='material-community' name={iconName} color='red' size={30} />
+    </View>
+  </TouchableWithoutFeedback>
 }
 
 export default Star;

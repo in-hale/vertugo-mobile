@@ -1,6 +1,6 @@
 import React from 'react';
 import { SwipeablePanel } from 'rn-swipeable-panel';
-import {Text, View, StyleSheet, Dimensions} from "react-native";
+import {Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
 import PropTypes from 'prop-types'
 import Swiper from 'react-native-swiper';
 import { Rating, Image } from 'react-native-elements';
@@ -8,16 +8,18 @@ import Star from "../Star";
 
 const { width } = Dimensions.get('window')
 
-const PlaceRating = ({ rating }) => (
+const PlaceRating = ({ rating, reviewCount }) => (
   <View style={styles.ratingContainer}>
     <Rating style={styles.rating} readonly startingValue={rating} imageSize={25} />
-    <Text style={styles.ratingText}>({rating})</Text>
+    <Text style={styles.ratingText}>({reviewCount})</Text>
   </View>
 )
 
-const PlacePreviewPanel = ({ isActive, onClose, place }) => {
+const PlacePreviewPanel = ({ isActive, onClose, place, onPress }) => {
   return (
-    <SwipeablePanel allowTouchOutside onlySmall fullWidth isActive={isActive} onClose={onClose} noBar>
+    <SwipeablePanel scrollViewProps={{
+      scrollEnabled: false
+    }} noBar allowTouchOutside onlySmall fullWidth isActive={isActive} onClose={onClose}>
       <Swiper scrollEnabled={false} removeClippedSubviews={false} style={styles.wrapper} showsButtons showsPagination={false}  >
         {
           place.images.map(imageUrl => (
@@ -27,15 +29,17 @@ const PlacePreviewPanel = ({ isActive, onClose, place }) => {
           ))
         }
       </Swiper>
-      <View style={styles.contentView}>
-        <View style={styles.placeNameContainer}>
-          <Text style={styles.placeNameText}>
-            {place.name}
-          </Text>
-          <Star active={place.isStarred} style={styles.star} />
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={styles.contentView}>
+          <View style={styles.placeNameContainer}>
+            <Text style={styles.placeNameText}>
+              {place.name}
+            </Text>
+            <Star active={place.isStarred} style={styles.star} onPress={() => { alert('kek') }} />
+          </View>
+          <PlaceRating rating={place.rating} reviewCount={place.reviewCount} />
         </View>
-        <PlaceRating rating={place.rating} />
-      </View>
+      </TouchableWithoutFeedback>
     </SwipeablePanel>
   );
 }
@@ -94,7 +98,9 @@ PlacePreviewPanel.propTypes = {
     rating: PropTypes.number,
     images: PropTypes.array,
     isStarred: PropTypes.bool
-  })
+  }),
+  onClose: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
 }
 
 PlacePreviewPanel.defaultProps = {

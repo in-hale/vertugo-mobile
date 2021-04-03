@@ -8,7 +8,7 @@ import Map from "../Map";
 import PlacePreviewPanel from "../PlacePreviewPanel";
 import { previewPlace, closePreview, loadOverviewPins } from "../../actions/map.actions"
 
-const HomeMap = ({ isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad }) => {
+const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad }) => {
   useEffect(overviewPinsLoad, [])
 
   return (
@@ -17,12 +17,12 @@ const HomeMap = ({ isPreviewActive, previewedPlace, overviewPins, placePreview, 
         {
           overviewPins.map(pin =>
             (
-              <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} />
+              <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />
             )
           )
         }
       </Map>
-      <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} />
+      <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { navigation.navigate('PlaceView') }} />
     </View>
   );
 }

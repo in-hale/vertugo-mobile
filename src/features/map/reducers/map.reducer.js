@@ -8,6 +8,14 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         isPreviewActive: true,
+        overviewPins: state.overviewPins.map(pin => {
+          if (pin.id == action.payload.id) {
+            pin.isSelected = true
+          } else {
+            pin.isSelected = undefined
+          }
+          return pin;
+        }),
         previewedPlace: action.payload
       }
     }
@@ -15,6 +23,10 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         isPreviewActive: false,
+        overviewPins: state.overviewPins.map(pin => {
+          pin.isSelected = undefined
+          return pin;
+        }),
         previewedPlace: undefined
       }
     }
