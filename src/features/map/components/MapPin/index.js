@@ -8,7 +8,7 @@ const MapPin = ({ isSelected, ...args }) => {
 
   return (
     <Marker centerOffset={{ x: 0, y: -17 }} { ...args }>
-      <Icon name='map-marker' type='material-community' color={color} size={size} />
+      <Icon name='map-marker' type='material-community' color={color} size={40} />
     </Marker>
   );
 };
