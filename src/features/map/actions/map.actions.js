@@ -4,6 +4,7 @@ export const MAP_PREVIEW_PLACE = 'MAP_PREVIEW_PLACE'
 export const MAP_CLOSE_PREVIEW = 'MAP_CLOSE_PREVIEW'
 export const LOAD_OVERVIEW_PINS = 'LOAD_OVERVIEW_PINS'
 export const VIEW_PLACE = 'VIEW_PLACE'
+export const LOAD_FAVOURITES = 'LOAD_FAVOURITES'
 
 // TODO: remove
 const place1 = {
@@ -147,4 +148,15 @@ export const viewPlace = id => dispatch => {
     payload: place(id)
   })
   navigate('PlaceView')
+}
+
+export const loadFavourites = () => dispatch => {
+  dispatch({
+    type: LOAD_FAVOURITES,
+    payload: {
+      favourites: [
+        place1
+      ]
+    }
+  })
 }

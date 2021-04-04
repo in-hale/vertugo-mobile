@@ -41,7 +41,12 @@ const mapDispatchToProps = dispatch => ({
 
 const LogOutButton = connect(null, mapDispatchToProps)(LogOutButtonComponent)
 
-const SideMenu = ({ navigation, logoutUser }) => {
+const SideMenu = ({ navigation }) => {
+  const navigate = screen => {
+    navigation.navigate(screen);
+    navigation.closeDrawer();
+  }
+
   return (
     <PageView>
       <View style={styles.container}>
@@ -50,8 +55,8 @@ const SideMenu = ({ navigation, logoutUser }) => {
         <SideMenuUserInfo />
 
         <View style={styles.menuView}>
-          <MenuItem title='Filters' icon='filter' onPress={() => { navigation.navigate('Filters') } } />
-          <MenuItem title='Favourites' icon='heart' onPress={() => { navigation.navigate('Liked places') } } />
+          <MenuItem title='Filters' icon='filter' onPress={() => { navigate('Filters') } } />
+          <MenuItem title='Favourites' icon='heart' onPress={() => { navigate('Favourites') } } />
           <LogOutButton />
         </View>
       </View>

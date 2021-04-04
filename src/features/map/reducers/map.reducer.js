@@ -1,4 +1,4 @@
-import {MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW, LOAD_OVERVIEW_PINS, VIEW_PLACE} from "../actions/map.actions";
+import {MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW, LOAD_OVERVIEW_PINS, VIEW_PLACE, LOAD_FAVOURITES} from "../actions/map.actions";
 
 const initialState = {
   viewedPlace: { name: 'kek'}
@@ -42,6 +42,12 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         viewedPlace: action.payload,
+      }
+    }
+    case LOAD_FAVOURITES: {
+      return {
+        ...state,
+        favourites: action.payload.favourites
       }
     }
     default: {

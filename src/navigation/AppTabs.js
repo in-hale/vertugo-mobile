@@ -6,7 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeMap from "../features/map/components/HomeMap";
 import PlaceView from "../features/map/components/PlaceView";
 import Filters from "../features/map/components/Filters";
-import LikedPlaces from "../features/map/components/LikedPlaces";
+import Favourites from "../features/map/components/Favourites";
 import SideMenu from "../features/map/components/SideMenu";
 import { backgroundColor } from "../styles";
 import LikeButton from "../features/map/components/LikeButton";
@@ -41,7 +41,7 @@ const AppTabs = ({ viewedPlaceName, viewedPlaceIsStarred }) => {
       }
     }} component={PlaceView} />
     <Stack.Screen name="Filters" component={Filters} />
-    <Stack.Screen name="Liked places" component={LikedPlaces} />
+    <Stack.Screen name="Favourites" component={Favourites} />
   </Stack.Navigator>
 };
 
