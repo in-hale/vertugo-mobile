@@ -1,5 +1,6 @@
-import {Button, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {KeyboardAvoidingView, Text, TextInput, View, Button as NativeButton} from "react-native";
 import React from "react";
+import Button from "../../../../components/Button";
 
 export const AuthenticationView = ({ children }) => (
   <KeyboardAvoidingView behavior='padding' style={{
@@ -23,40 +24,20 @@ export const AuthenticationInput = ({ ...args }) => (
 export const AuthenticationFooter = ({ children, label, title, onPress }) => (
   <View style={{
     alignItems: 'flex-end',
-    width: '80%',
-    alignSelf: 'center'
   }}>
     <View style={{
       flexDirection: 'row',
       alignItems: 'center',
     }}>
       <Text>{ label }</Text>
-      <Button title={title} onPress={onPress} />
+      <NativeButton title={title} onPress={onPress} />
       {children}
     </View>
   </View>
 )
 
 export const AuthenticationButton = ({ title, onPress }) => (
-  <View style={{
-    alignItems: 'center'
-  }} >
-    <TouchableOpacity onPress={onPress} style={{
-      paddingVertical: 10,
-      paddingHorizontal: 18,
-      backgroundColor: 'green',
-      borderRadius: 10,
-      width: '80%',
-    }} >
-      <Text style={{
-        textAlign: 'center',
-        color: 'white',
-        fontSize: 20
-      }} >
-        { title }
-      </Text>
-    </TouchableOpacity>
-  </View>
+  <Button title={title} onPress={onPress} size={10} style={{}} />
 )
 
 export const AuthenticationError = ({ title }) => (

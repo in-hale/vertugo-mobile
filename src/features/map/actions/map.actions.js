@@ -14,8 +14,36 @@ const place1 = {
     'https://i0.wp.com/www.eatthis.com/wp-content/uploads/2020/10/mcdonalds-exterior.jpg?resize=1250%2C702&ssl=1',
     'https://www.marconfitout.com/wp-content/uploads/2014/10/McDonalds-Glenmachen-Street-1.jpg'
   ],
-  reviewCount: 10,
-  reviews: [],
+  reviewCount: 3,
+  reviews: [
+    {
+      id: 1,
+      user: {
+        id: 1,
+        login: 'terminator2005'
+      },
+      rating: 2,
+      text: 'Great! Will never go there again'
+    },
+    {
+      id: 2,
+      user: {
+        id: 2,
+        login: 'NAGIBATOR228'
+      },
+      rating: 4,
+      text: 'Bullshit! Liked it'
+    },
+    {
+      id: 3,
+      user: {
+        id: 3,
+        login: 'NAGIBATOR1337'
+      },
+      rating: 5,
+      text: ''
+    }
+  ],
   isStarred: true,
   mealCategories: [
     {
@@ -28,6 +56,13 @@ const place1 = {
           price: 7.0,
           currency: 'BYN',
           categoryId: 1
+        },
+        {
+          id: 2,
+          name: 'Чикен премьер',
+          price: 5.5,
+          currency: 'BYN',
+          categoryId: 1
         }
       ]
     }
@@ -35,34 +70,21 @@ const place1 = {
   location: {
     latitude: 53.954781,
     longitude: 27.619631
-  }
+  },
+  telephoneNumber: '+375296108465'
 }
 const place2 = {
   id: 2,
-  rating: 3,
+  rating: 0,
   name: "Pizza Tempo",
   images: [
     'https://www.tempo.by/img/Aisberg.jpg',
     'https://www.tempo.by/img/Nezavisimosti_78.jpg'
   ],
-  reviewCount: 10,
+  reviewCount: 0,
   reviews: [],
   isStarred: false,
-  mealCategories: [
-    {
-      id: 1,
-      name: 'Горячие блюда',
-      meals: [
-        {
-          id: 1,
-          name: 'Биг Тейсти',
-          price: 7.0,
-          currency: 'BYN',
-          categoryId: 1
-        }
-      ]
-    }
-  ],
+  mealCategories: [],
   location: {
     latitude: 53.946781,
     longitude: 27.608931
