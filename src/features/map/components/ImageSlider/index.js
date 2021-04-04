@@ -3,8 +3,8 @@ import {Image} from "react-native-elements";
 import Swiper from "react-native-swiper";
 import React from "react";
 
-const ImageSlider = ({ images }) => {
-  return <Swiper scrollEnabled={false} removeClippedSubviews={false} style={styles.swiper} showsButtons showsPagination={false}  >
+const ImageSlider = ({ images, style }) => {
+  return <Swiper scrollEnabled={false} removeClippedSubviews={false} style={{ ...styles.swiper, ...style }} showsButtons showsPagination={false}  >
     {
       images.map(imageUrl => (
         <View style={styles.slide} key={imageUrl}>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width,
-    height: '100%'
+    maxHeight: '100%'
   }
 });
 

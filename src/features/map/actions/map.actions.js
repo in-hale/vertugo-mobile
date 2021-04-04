@@ -1,4 +1,4 @@
-import { navigate } from "../../../navigation/rootNavigation";
+import { navigate, mapZoomToLocationWithOffset } from "../../../navigation/rootNavigation";
 
 export const MAP_PREVIEW_PLACE = 'MAP_PREVIEW_PLACE'
 export const MAP_CLOSE_PREVIEW = 'MAP_CLOSE_PREVIEW'
@@ -31,7 +31,11 @@ const place1 = {
         }
       ]
     }
-  ]
+  ],
+  location: {
+    latitude: 53.954781,
+    longitude: 27.619631
+  }
 }
 const place2 = {
   id: 2,
@@ -58,7 +62,11 @@ const place2 = {
         }
       ]
     }
-  ]
+  ],
+  location: {
+    latitude: 53.946781,
+    longitude: 27.608931
+  }
 }
 const place = id => {
   switch (id) {
@@ -68,23 +76,18 @@ const place = id => {
 }
 
 export const previewPlace = (id) => dispatch => {
-  if(id == 1) {
-    dispatch({
-      type: MAP_PREVIEW_PLACE,
-      payload: place1
-    })
-  } else {
-    dispatch({
-      type: MAP_PREVIEW_PLACE,
-      payload: place2
-    })
-  }
+  const selectedPlace = place(id)
 
-  // GET Request
-
+  dispatch({
+    type: MAP_PREVIEW_PLACE,
+    payload: selectedPlace
+  })
+  navigate('HomeMap')
+  mapZoomToLocationWithOffset(selectedPlace.location, {
+    x: 0,
+    y: -0.004
+  })
 }
-
-
 
 export const closePreview = () => ({
   type: MAP_CLOSE_PREVIEW,
@@ -105,13 +108,6 @@ export const loadOverviewPins = () => dispatch => {
         },
         {
           id: 2,
-          location: {
-            latitude: 53.956781,
-            longitude: 27.619931
-          }
-        },
-        {
-          id: 3,
           location: {
             latitude: 53.946781,
             longitude: 27.608931

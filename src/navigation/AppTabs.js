@@ -37,7 +37,7 @@ const AppTabs = ({ viewedPlaceName, viewedPlaceIsStarred }) => {
       headerTitle: viewedPlaceName,
       headerRight: () => <LikeButton active={viewedPlaceIsStarred} />,
       headerRightContainerStyle: {
-        right: 7
+        right: 14
       }
     }} component={PlaceView} />
     <Stack.Screen name="Filters" component={Filters} />

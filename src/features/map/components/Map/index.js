@@ -1,35 +1,25 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import MapView from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
 
-const Map = ({ children }) => {
-  const map = useRef(null);
+import { mapZoomToLocation, mapRef } from "../../../../navigation/rootNavigation";
 
+const Map = ({ children }) => {
   const getCurrentLocation = () => {
     return new Promise((resolve, reject) => {
       Geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
     });
   };
 
-  const zoomToLocation = position => {
-    if (position) {
-      map.current.animateToRegion({
-        latitude: parseFloat(position.coords.latitude),
-        longitude: parseFloat(position.coords.longitude),
-        latitudeDelta: 0.03,
-        longitudeDelta: 0.02
-      }, 1000)
-    }
-  }
-
   return (
     <MapView
       style={styles.map}
       showsUserLocation
-      ref={map}
+      ref={mapRef}
       onMapReady={() => {
-        getCurrentLocation().then(zoomToLocation, () => {})
+        getCurrentLocation().then(({coords}) => (mapZoomToLocation(coords)), () => {
+        })
       }}
       initialRegion={{
         latitude: 53.908200,
