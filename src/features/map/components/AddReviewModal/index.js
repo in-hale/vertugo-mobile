@@ -8,10 +8,7 @@ const AddReviewModal = ({ visible, onRequestClose }) => {
   const [rating, setRating] = useState(3);
   const [reviewText, setReviewText] = useState('');
 
-  return <Modal onBackdropPress={() => {
-    Keyboard.dismiss();
-    onRequestClose();
-  }} transparent isVisible={visible} avoidKeyboard>
+  return <Modal transparent isVisible={visible} avoidKeyboard>
     <View style={styles.container}>
       <View style={styles.modalView}>
         <TextInput
@@ -23,7 +20,13 @@ const AddReviewModal = ({ visible, onRequestClose }) => {
         />
         <View style={styles.ratingAndButtonContainer}>
           <Rating startingValue={rating} onFinishRating={r => {setRating(Math.round(r))}} imageSize={30} />
-          <Button title='Send' size={8} style={styles.button} />
+          <View style={styles.buttons}>
+            <Button title='Cancel' size={8} style={{ marginRight: 5 }} onPress={() => {
+              Keyboard.dismiss();
+              onRequestClose();
+            }} />
+            <Button title='Send' size={8} />
+          </View>
         </View>
       </View>
     </View>
@@ -51,7 +54,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%'
   },
-  button: {
+  buttons: {
+    flexDirection: 'row',
     position: 'absolute',
     right: 0
   }

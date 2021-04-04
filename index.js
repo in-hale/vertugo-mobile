@@ -5,13 +5,19 @@ import { enableScreens } from "react-native-screens";
 
 import myStore from "./src/Store";
 import Routes from "./src/navigation/routes";
+import {PersistGate} from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
 enableScreens();
+
+const persistor = persistStore(myStore);
 
 const Root = () => {
   return (
     <Provider store={myStore}>
-      <Routes/>
+      <PersistGate loading={null} persistor={persistor}>
+        <Routes/>
+      </PersistGate>
     </Provider>
   );
 };

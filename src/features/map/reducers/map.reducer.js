@@ -4,15 +4,12 @@ import {
   LOAD_OVERVIEW_PINS,
   VIEW_PLACE,
   LOAD_FAVOURITES,
-  ADD_OR_UPDATE_FILTER
+  SET_FILTERS
 } from "../actions/map.actions";
 
 const initialState = {
   viewedPlace: {},
-  filters: {
-    menuElement: '',
-    minRating: 0
-  }
+  filters: []
 }
 
 const mapReducer = (state = initialState, action) => {
@@ -61,13 +58,10 @@ const mapReducer = (state = initialState, action) => {
         favourites: action.payload.favourites
       }
     }
-    case ADD_OR_UPDATE_FILTER: {
-      const { name, value } = action.payload
-      const resultingFilters = Object.assign({}, state.filters, { [name]: value })
-
+    case SET_FILTERS: {
       return {
         ...state,
-        filters: resultingFilters
+        filters: action.payload.filters
       }
     }
     default: {

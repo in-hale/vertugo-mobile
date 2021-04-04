@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from "react-redux";
 import PageView from "../../../../components/PageView";
-import Logo from "../../../../components/Logo"
 import {StyleSheet, Text, TextInput, View} from "react-native";
 import {Rating} from "react-native-elements";
-import { addOrUpdateFilter } from "../../actions/map.actions";
+import { setFilters } from "../../actions/map.actions";
+import Button from "../../../../components/Button";
 
 const FilterInputContainer = ({ label, children }) => {
   return <View >
@@ -15,15 +15,38 @@ const FilterInputContainer = ({ label, children }) => {
   </View>
 }
 
-const Filters = ({ filters, updateFilter }) => {
+const Filters = ({ filtersSet, filters, navigation }) => {
+  const findFilterValueByName = (array, name, fallback) => {
+    const filter = array.find(el => el.name == name)
+
+    return filter ? filter.value : fallback
+  }
+
+  const [menuElementFilter, setMenuElementFilter] = useState(findFilterValueByName(filters, 'menuElement', ''));
+  const [minRatingFilter, setMinRatingFilter] = useState(findFilterValueByName(filters, 'minRating', 0));
+
   return (
     <PageView style={styles.container}>
       <FilterInputContainer label='Menu element'>
-        <TextInput style={styles.filterTextInput} value={filters.menuElement} onChangeText={val => updateFilter('menuElement', val)} />
+        <TextInput style={styles.filterTextInput} value={menuElementFilter} onChangeText={setMenuElementFilter} />
       </FilterInputContainer>
       <FilterInputContainer label='MIN Rating'>
-        <Rating startingValue={filters.minRating} onFinishRating={r => {updateFilter('minRating', Math.round(r))}} imageSize={30} />
+        <Rating startingValue={minRatingFilter} onFinishRating={r => { setMinRatingFilter(Math.round(r)) }} imageSize={30} />
       </FilterInputContainer>
+
+      <Button title='Save' onPress={() => {
+        filtersSet([
+          {
+            name: 'menuElement',
+            value: menuElementFilter
+          },
+          {
+            name: 'minRating',
+            value: minRatingFilter
+          }
+        ])
+        navigation.navigate('HomeMap')
+      }} />
     </PageView>
   );
 }
@@ -55,7 +78,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateFilter: (name, value) => dispatch(addOrUpdateFilter({ name, value }))
+  filtersSet: (filters) => dispatch(setFilters(filters))
 })
 
 

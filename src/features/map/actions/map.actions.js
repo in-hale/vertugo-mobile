@@ -5,7 +5,7 @@ export const MAP_CLOSE_PREVIEW = 'MAP_CLOSE_PREVIEW'
 export const LOAD_OVERVIEW_PINS = 'LOAD_OVERVIEW_PINS'
 export const VIEW_PLACE = 'VIEW_PLACE'
 export const LOAD_FAVOURITES = 'LOAD_FAVOURITES'
-export const ADD_OR_UPDATE_FILTER = 'ADD_OR_UPDATE_FILTER'
+export const SET_FILTERS = 'SET_FILTERS'
 
 // TODO: remove
 const place1 = {
@@ -162,10 +162,9 @@ export const loadFavourites = () => dispatch => {
   })
 }
 
-export const addOrUpdateFilter = ({ name, value }) => ({
-  type: ADD_OR_UPDATE_FILTER,
+export const setFilters = (filters) => ({
+  type: SET_FILTERS,
   payload: {
-    name,
-    value
+    filters
   }
 })
