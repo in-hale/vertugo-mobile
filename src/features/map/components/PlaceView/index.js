@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from "react-redux";
 import {ScrollView, StyleSheet, Text, View, Linking} from "react-native";
 
@@ -10,9 +10,12 @@ import { previewPlace } from "../../actions/map.actions";
 import Button from "../../../../components/Button";
 import CategorizedMenuItems from "../CategorizedMenuItems";
 import Reviews from "../Reviews";
+import AddReviewModal from "../AddReviewModal";
 
 
 const PlaceView = ({ place, placePreview }) => {
+  const [isAddReviewModalVisible, setAddReviewModalVisibility] = useState(false);
+
   return (
     <PageView>
       <ScrollView>
@@ -39,13 +42,14 @@ const PlaceView = ({ place, placePreview }) => {
               <Text style={styles.pageSectionTitle}>Reviews</Text>
               <Button style={{
                 marginLeft: 10,
-              }} title='Add' size={10} />
+              }} title='Add' size={10} onPress={() => { setAddReviewModalVisibility(true) }} />
             </View>
 
             <Reviews reviews={place.reviews} />
           </View>
         </View>
       </ScrollView>
+      <AddReviewModal onRequestClose={() => setAddReviewModalVisibility(false)} visible={isAddReviewModalVisible} />
     </PageView>
   );
 }

@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, StyleSheet} from "react-native";
 import React from "react";
 
-const Button = ({ title, onPress, size, style }) => {
+const Button = ({ title, onPress, size = 10, style }) => {
   const BASE_FONT_SIZE = 1.7
   const BASE_PADDING_V = 1
   const BASE_PADDING_H = 1.8

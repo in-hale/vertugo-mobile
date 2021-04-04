@@ -1,8 +1,8 @@
 import { USER_SIGN_OUT, USER_APPLY, ADD_SIGN_IN_ERROR, ADD_SIGN_UP_ERROR } from '../actions/authentication.actions'
 
 const initialState = {
-  active: false,
   // TODO: Remove
+  active: true,
   login: 'loginlogin123',
   email: 'emailemail@gmail.com'
 }
