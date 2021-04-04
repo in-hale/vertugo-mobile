@@ -7,6 +7,7 @@ import PlaceRating from "../PlaceRating";
 import PressableIcon from "../../../../components/PressableIcon";
 import { previewPlace } from "../../actions/map.actions";
 import { List } from 'react-native-paper';
+import Icon from "../../../../components/Icon";
 
 const MenuSection = ({ children, title }) => (
   <List.Accordion style={styles.menuSection} title={title} titleStyle={styles.menuSectionTitle}>
@@ -24,6 +25,23 @@ const PriceTag = ({ amount, currency }) => (
   </Text>
 )
 
+const ReviewItem = ({ userLogin, rating, text }) => (
+  <View style={styles.reviewItem}>
+    <Icon name='account-circle' size={60} />
+    <View style={styles.reviewContent}>
+      <View style={styles.reviewLoginAndRatingContainer}>
+        <PlaceRating rating={rating} showCount={false} size={15} />
+        <Text style={styles.reviewLogin}>{userLogin}</Text>
+      </View>
+      <View style={styles.reviewTextContainer}>
+        <Text style={styles.reviewText}>
+          { text }
+        </Text>
+      </View>
+    </View>
+  </View>
+)
+
 const PlaceView = ({ place, placePreview }) => {
   return (
     <PageView>
@@ -37,8 +55,8 @@ const PlaceView = ({ place, placePreview }) => {
               <PressableIcon name='map-marker' size={35} onPress={() => { placePreview(place.id) }} color='red' />
             </View>
           </View>
-          <View style={styles.menuContainer}>
-            <Text style={styles.menuTitle}>Menu</Text>
+          <View style={styles.pageSectionContainer}>
+            <Text style={styles.pageSectionTitle}>Menu</Text>
 
             <MenuSection title="Pasta">
               <MenuItem title='First item' price={9} currency='BYN' />
@@ -49,6 +67,19 @@ const PlaceView = ({ place, placePreview }) => {
               <MenuItem title='First item' price={10} currency='BYN' />
               <MenuItem title='Second item' price={20.9} currency='BYN' />
             </MenuSection>
+          </View>
+          <View style={{ ...styles.pageSectionContainer, borderBottomWidth: 0 }}>
+            <Text style={styles.pageSectionTitle}>Reviews</Text>
+
+            <View style={styles.reviewsContainer}>
+              <ReviewItem rating={4} userLogin='User Login' text='Great! Will never go there again' />
+              <ReviewItem rating={2.5} userLogin='terminator2005' text='Bullshit! Liked it' />
+              <ReviewItem rating={2.5} userLogin='terminator2005' text='Bullshit! Liked it' />
+              <ReviewItem rating={2.5} userLogin='terminator2005' text='Bullshit! Liked it' />
+              <ReviewItem rating={2.5} userLogin='terminator2005' text='Bullshit! Liked it' />
+              <ReviewItem rating={2.5} userLogin='terminator2005' text='Bullshit! Liked it' />
+
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -71,10 +102,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'flex-end',
   },
-  menuContainer: {
+  pageSectionContainer: {
     borderBottomWidth: 1,
+    marginBottom: 10,
   },
-  menuTitle: {
+  pageSectionTitle: {
     fontSize: 25,
     fontWeight: '600',
     marginLeft: 10,
@@ -95,6 +127,34 @@ const styles = StyleSheet.create({
   priceTag: {
     marginRight: 10,
     marginTop: 6
+  },
+  reviewsContainer: {
+    marginLeft: 5,
+  },
+  reviewItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  reviewContent: {
+    paddingLeft: 5,
+    flexGrow: 1,
+  },
+  reviewLoginAndRatingContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingBottom: 2,
+  },
+  reviewLogin: {
+    top: 2,
+    paddingLeft: 5,
+    fontWeight: '600'
+  },
+  reviewTextContainer: {
+    marginRight: 60,
+    justifyContent: 'center',
+    flexGrow: 1
+  },
+  reviewText: {
   }
 });
 

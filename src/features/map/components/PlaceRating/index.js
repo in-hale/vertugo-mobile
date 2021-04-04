@@ -3,7 +3,7 @@ import {Rating} from "react-native-elements";
 import React from "react";
 import {backgroundColor} from "../../../../styles";
 
-const PlaceRating = ({ rating, reviewCount }) => {
+const PlaceRating = ({ rating, reviewCount, size = 25, showCount = true }) => {
   const tintProp = backgroundColor == 'white' ? {} : { tintColor: backgroundColor }
 
   return (
@@ -13,9 +13,11 @@ const PlaceRating = ({ rating, reviewCount }) => {
               ratingBackgroundColor={backgroundColor}
               readonly
               startingValue={rating}
-              imageSize={25}
+              imageSize={size}
               {...tintProp} />
-      <Text style={styles.ratingText}>({reviewCount})</Text>
+      {
+        showCount ? <Text style={styles.ratingText}>({reviewCount})</Text> : null
+      }
     </View>
   )
 }
