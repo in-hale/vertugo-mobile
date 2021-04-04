@@ -31,7 +31,8 @@ const AppTabs = ({ viewedPlaceName, viewedPlaceIsStarred }) => {
     }
   }}>
     <Stack.Screen name="HomeMap" component={DrawerNavigator} options={{
-      headerShown: false
+      headerShown: false,
+      headerTitle: 'Map'
     }} />
     <Stack.Screen name="PlaceView" options={{
       headerTitle: viewedPlaceName,

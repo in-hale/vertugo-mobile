@@ -3,9 +3,9 @@ import { StyleSheet, View } from 'react-native';
 
 import { backgroundColor } from "../../styles";
 
-const PageView = ({ children }) => {
+const PageView = ({ children, style }) => {
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, ...style}}>
       { children }
     </View>
   );

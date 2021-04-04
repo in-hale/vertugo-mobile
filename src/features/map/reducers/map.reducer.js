@@ -1,7 +1,18 @@
-import {MAP_PREVIEW_PLACE, MAP_CLOSE_PREVIEW, LOAD_OVERVIEW_PINS, VIEW_PLACE, LOAD_FAVOURITES} from "../actions/map.actions";
+import {
+  MAP_PREVIEW_PLACE,
+  MAP_CLOSE_PREVIEW,
+  LOAD_OVERVIEW_PINS,
+  VIEW_PLACE,
+  LOAD_FAVOURITES,
+  ADD_OR_UPDATE_FILTER
+} from "../actions/map.actions";
 
 const initialState = {
-  viewedPlace: { name: 'kek'}
+  viewedPlace: {},
+  filters: {
+    menuElement: '',
+    minRating: 0
+  }
 }
 
 const mapReducer = (state = initialState, action) => {
@@ -48,6 +59,15 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         favourites: action.payload.favourites
+      }
+    }
+    case ADD_OR_UPDATE_FILTER: {
+      const { name, value } = action.payload
+      const resultingFilters = Object.assign({}, state.filters, { [name]: value })
+
+      return {
+        ...state,
+        filters: resultingFilters
       }
     }
     default: {
