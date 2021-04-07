@@ -1,4 +1,5 @@
 import { navigate, mapZoomToLocationWithOffset } from "../../../navigation/rootNavigation";
+import * as api from "../../../api/map";
 
 export const MAP_PREVIEW_PLACE = 'MAP_PREVIEW_PLACE'
 export const MAP_CLOSE_PREVIEW = 'MAP_CLOSE_PREVIEW'
@@ -118,27 +119,18 @@ export const closePreview = () => ({
   payload: {},
 })
 
-export const loadOverviewPins = () => dispatch => {
-  dispatch({
-    type: LOAD_OVERVIEW_PINS,
-    payload: {
-      overviewPins: [
-        {
-          id: 1,
-          location: {
-            latitude: 53.954781,
-            longitude: 27.619631
-          }
-        },
-        {
-          id: 2,
-          location: {
-            latitude: 53.946781,
-            longitude: 27.608931
-          }
-        }
-      ]
-    }
+export const loadOverviewPins = filters => dispatch => {
+  const apiFriendlyFilters = Object.fromEntries(
+    filters.map(f => [f.name, f.value])
+  )
+
+  api.getOverviewPins(apiFriendlyFilters).then(result => {
+    dispatch({
+      type: LOAD_OVERVIEW_PINS,
+      payload: {
+        overviewPins: result.data.allPlaces
+      }
+    })
   })
 }
 
@@ -162,7 +154,7 @@ export const loadFavourites = () => dispatch => {
   })
 }
 
-export const setFilters = (filters) => ({
+export const setFilters = filters => ({
   type: SET_FILTERS,
   payload: {
     filters

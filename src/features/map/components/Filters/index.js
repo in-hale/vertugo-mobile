@@ -22,13 +22,13 @@ const Filters = ({ filtersSet, filters, navigation }) => {
     return filter ? filter.value : fallback
   }
 
-  const [menuElementFilter, setMenuElementFilter] = useState(findFilterValueByName(filters, 'menuElement', ''));
+  const [mealsContainFilter, setMealsContainFilter] = useState(findFilterValueByName(filters, 'mealsContain', ''));
   const [minRatingFilter, setMinRatingFilter] = useState(findFilterValueByName(filters, 'minRating', 0));
 
   return (
     <PageView style={styles.container}>
-      <FilterInputContainer label='Menu element'>
-        <TextInput style={styles.filterTextInput} value={menuElementFilter} onChangeText={setMenuElementFilter} />
+      <FilterInputContainer label='Meals contain'>
+        <TextInput style={styles.filterTextInput} value={mealsContainFilter} onChangeText={setMealsContainFilter} />
       </FilterInputContainer>
       <FilterInputContainer label='MIN Rating'>
         <Rating startingValue={minRatingFilter} onFinishRating={r => { setMinRatingFilter(Math.round(r)) }} imageSize={30} />
@@ -37,8 +37,8 @@ const Filters = ({ filtersSet, filters, navigation }) => {
       <Button title='Save' onPress={() => {
         filtersSet([
           {
-            name: 'menuElement',
-            value: menuElementFilter
+            name: 'mealsContain',
+            value: mealsContainFilter
           },
           {
             name: 'minRating',

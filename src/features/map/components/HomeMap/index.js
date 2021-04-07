@@ -39,8 +39,8 @@ const OverlayIcons = ({ children }) => {
   );
 };
 
-const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView }) => {
-  useEffect(overviewPinsLoad, []);
+const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView, filters }) => {
+  useEffect(() => overviewPinsLoad(filters), [filters]);
 
   return (
     <View style={styles.container}>
@@ -84,13 +84,14 @@ HomeMap.defaultProps = {
 const mapStateToProps = state => ({
   isPreviewActive: state.map.isPreviewActive,
   previewedPlace: state.map.previewedPlace,
-  overviewPins: state.map.overviewPins
+  overviewPins: state.map.overviewPins,
+  filters: state.map.filters
 })
 
 const mapDispatchToProps = dispatch => ({
   placePreview: (id) => dispatch(previewPlace(id)),
   previewClose: () => dispatch(closePreview()),
-  overviewPinsLoad: () => dispatch(loadOverviewPins()),
+  overviewPinsLoad: (filters) => dispatch(loadOverviewPins(filters)),
   placeView: (id) => dispatch(viewPlace(id))
 })
 
