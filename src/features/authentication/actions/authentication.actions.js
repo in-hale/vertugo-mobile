@@ -1,4 +1,5 @@
 import * as api from "../../../api/authentication";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export const USER_SIGN_OUT = 'USER_SIGN_OUT'
 export const USER_APPLY = 'USER_APPLY'
@@ -12,6 +13,7 @@ export const userLogin = (credentials) => dispatch => {
         type: USER_APPLY,
         payload: result.data.signInUser
       })
+      AsyncStorage.setItem('api_token', result.data.signInUser.token)
     },
     errorData => {
       dispatch({
