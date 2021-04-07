@@ -13,11 +13,11 @@ const place1 = {
   id: 1,
   rating: 4.5,
   name: "McDonald's",
-  images: [
+  imageUrls: [
     'https://i0.wp.com/www.eatthis.com/wp-content/uploads/2020/10/mcdonalds-exterior.jpg?resize=1250%2C702&ssl=1',
     'https://www.marconfitout.com/wp-content/uploads/2014/10/McDonalds-Glenmachen-Street-1.jpg'
   ],
-  reviewCount: 3,
+  reviewsCount: 3,
   reviews: [
     {
       id: 1,
@@ -47,7 +47,7 @@ const place1 = {
       text: ''
     }
   ],
-  isStarred: true,
+  isFavourite: true,
   mealCategories: [
     {
       id: 1,
@@ -80,13 +80,13 @@ const place2 = {
   id: 2,
   rating: 0,
   name: "Pizza Tempo",
-  images: [
+  imageUrls: [
     'https://www.tempo.by/img/Aisberg.jpg',
     'https://www.tempo.by/img/Nezavisimosti_78.jpg'
   ],
-  reviewCount: 0,
+  reviewsCount: 0,
   reviews: [],
-  isStarred: false,
+  isFavourite: false,
   mealCategories: [],
   location: {
     latitude: 53.946781,
@@ -101,16 +101,18 @@ const place = id => {
 }
 
 export const previewPlace = (id) => dispatch => {
-  const selectedPlace = place(id)
+  api.getPlacePreview(id).then(result => {
+    const selectedPlace = result.data.allPlaces[0]
 
-  dispatch({
-    type: MAP_PREVIEW_PLACE,
-    payload: selectedPlace
-  })
-  navigate('HomeMap')
-  mapZoomToLocationWithOffset(selectedPlace.location, {
-    x: 0,
-    y: -0.004
+    dispatch({
+      type: MAP_PREVIEW_PLACE,
+      payload: selectedPlace
+    })
+    navigate('HomeMap')
+    mapZoomToLocationWithOffset(selectedPlace.location, {
+      x: 0,
+      y: -0.004
+    })
   })
 }
 

@@ -48,7 +48,7 @@ const AppTabs = ({ viewedPlaceName, viewedPlaceIsStarred }) => {
 
 const mapStateToProps = state => ({
   viewedPlaceName: state.map.viewedPlace.name,
-  viewedPlaceIsStarred: state.map.viewedPlace.isStarred
+  viewedPlaceIsStarred: state.map.viewedPlace.isFavourite
 })
 
 export default connect(mapStateToProps)(AppTabs);

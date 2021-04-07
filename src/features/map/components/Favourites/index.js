@@ -8,7 +8,7 @@ import {loadFavourites, viewPlace} from "../../actions/map.actions";
 const Favourite = ({ place, onPress }) => {
   return <TouchableOpacity style={styles.item} onPress={onPress}>
     <Text style={styles.title}>{place.name}</Text>
-    <PlaceRating rating={place.rating} reviewCount={place.reviewCount} />
+    <PlaceRating rating={place.rating} reviewsCount={place.reviewsCount} />
   </TouchableOpacity>
 }
 

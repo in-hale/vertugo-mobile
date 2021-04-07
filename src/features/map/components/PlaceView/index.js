@@ -19,10 +19,10 @@ const PlaceView = ({ place, placePreview }) => {
   return (
     <PageView>
       <ScrollView>
-        <ImageSlider images={place.images} style={{ height: 300 }} />
+        <ImageSlider imageUrls={place.imageUrls} style={{ height: 300 }} />
         <View style={styles.container}>
           <View style={styles.ratingAndActionsContainer}>
-            <PlaceRating reviewCount={place.reviewCount} rating={place.rating} />
+            <PlaceRating reviewsCount={place.reviewsCount} rating={place.rating} />
             <View style={styles.actions} >
               {place.telephoneNumber
                   ? <PressableIcon name='phone' size={35} onPress={() => { Linking.openURL(`tel:${place.telephoneNumber}`) }}  />

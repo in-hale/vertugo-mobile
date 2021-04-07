@@ -3,10 +3,10 @@ import {Image} from "react-native-elements";
 import Swiper from "react-native-swiper";
 import React from "react";
 
-const ImageSlider = ({ images, style }) => {
+const ImageSlider = ({ imageUrls, style }) => {
   return <Swiper scrollEnabled={false} removeClippedSubviews={false} style={{ ...styles.swiper, ...style }} showsButtons showsPagination={false}  >
     {
-      images.map(imageUrl => (
+      imageUrls.map(imageUrl => (
         <View style={styles.slide} key={imageUrl}>
           <Image style={styles.image} source={{ uri: imageUrl }} />
         </View>

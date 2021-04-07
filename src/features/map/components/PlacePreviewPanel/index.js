@@ -12,16 +12,16 @@ const PlacePreviewPanel = ({ isActive, onClose, place, onPress }) => {
     <SwipeablePanel style={styles.panel} scrollViewProps={{
       scrollEnabled: false
     }} noBar allowTouchOutside onlySmall fullWidth isActive={isActive} onClose={onClose}>
-      <ImageSlider images={place.images} />
+      <ImageSlider imageUrls={place.imageUrls} />
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.contentView}>
           <View style={styles.placeNameContainer}>
             <Text style={styles.placeNameText}>
               {place.name}
             </Text>
-            <LikeButton active={place.isStarred} style={styles.star} onPress={() => { alert('kek') }} />
+            <LikeButton active={place.isFavourite} style={styles.star} onPress={() => { alert('kek') }} />
           </View>
-          <PlaceRating rating={place.rating} reviewCount={place.reviewCount} />
+          <PlaceRating rating={place.rating} reviewsCount={place.reviewsCount} />
         </View>
       </TouchableWithoutFeedback>
     </SwipeablePanel>
@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
 PlacePreviewPanel.propTypes = {
   isActive: PropTypes.bool,
   place: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string,
     rating: PropTypes.number,
-    images: PropTypes.array,
-    isStarred: PropTypes.bool
+    imageUrls: PropTypes.array,
+    isFavourite: PropTypes.bool
   }),
   onClose: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,
@@ -71,8 +71,8 @@ PlacePreviewPanel.defaultProps = {
     id: null,
     name: '',
     rating: 0,
-    images: [],
-    isStarred: false
+    imageUrls: [],
+    isFavourite: false
   }
 }
 
