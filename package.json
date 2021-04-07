@@ -49,6 +49,7 @@
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1",
+    "reactotron-react-native": "^5.0.0",
     "redux-devtools-extension": "^2.13.9",
     "remote-redux-devtools": "^0.5.16"
   },

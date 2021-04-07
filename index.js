@@ -12,6 +12,10 @@ enableScreens();
 
 const persistor = persistStore(store);
 
+if(__DEV__) {
+  import('./src/ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
+
 const Root = () => {
   return (
     <Provider store={store}>

@@ -30,6 +30,7 @@ export const getPlacePreview = (id) => {
         rating
         reviewsCount
         imageUrls
+        isFavourite
         location {
           latitude
           longitude
