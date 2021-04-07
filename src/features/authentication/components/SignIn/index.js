@@ -14,8 +14,8 @@ import {
 } from '../helpers'
 import { userLogin } from '../../actions/authentication.actions'
 
-const SignIn = ({ navigation, loginUser, error }) => {
-  const [login, setLogin] = useState('');
+const SignIn = ({ navigation, loginUser, errors = [] }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
@@ -23,10 +23,12 @@ const SignIn = ({ navigation, loginUser, error }) => {
       <AuthenticationView>
         <Logo style={{ paddingBottom: 50 }} />
         <View style={{ width: '80%' }}>
-          <AuthenticationInput placeholder="Login" onChangeText={setLogin} value={login} />
+          <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} />
           <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} />
-          <AuthenticationError title={error} />
-          <AuthenticationButton title='Sign in' onPress={() => loginUser(login, password)} />
+          {
+            errors.map(error => <AuthenticationError title={error} />)
+          }
+          <AuthenticationButton title='Sign in' onPress={() => loginUser({ email, password })} />
           <AuthenticationFooter label="Don't have an account yet?"
                                 title='Sign up'
                                 onPress={() => {navigation.navigate('SignUp')}} />
@@ -37,11 +39,11 @@ const SignIn = ({ navigation, loginUser, error }) => {
 }
 
 const mapStateToProps = (state) => ({
-  error: state.authentication.signInError
+  errors: state.authentication.signInErrors
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (login, password) => dispatch(userLogin(login, password)),
+  loginUser: (credentials) => dispatch(userLogin(credentials)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

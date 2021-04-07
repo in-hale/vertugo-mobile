@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-  login: state.authentication.login,
-  email: state.authentication.email
+  login: state.authentication.user.login,
+  email: state.authentication.user.email
 })
 
 

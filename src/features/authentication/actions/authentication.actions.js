@@ -1,25 +1,27 @@
+import * as api from "../../../api/authentication";
+
 export const USER_SIGN_OUT = 'USER_SIGN_OUT'
 export const USER_APPLY = 'USER_APPLY'
-export const ADD_SIGN_IN_ERROR = 'ADD_SIGN_IN_ERROR'
-export const ADD_SIGN_UP_ERROR = 'ADD_SIGN_UP_ERROR'
+export const SET_SIGN_IN_ERRORS = 'SET_SIGN_IN_ERRORS'
+export const SET_SIGN_UP_ERRORS = 'SET_SIGN_UP_ERRORS'
 
-export const userLogin = (login, password) => dispatch => {
-  if (login == 'kek' && password == 'lol') {
-    dispatch({
-      type: USER_APPLY,
-      payload: {
-        login,
-        email: 'email@mail.com'
-      }
-    })
-  } else {
-    dispatch({
-      type: ADD_SIGN_IN_ERROR,
-      payload: {
-        error: `Incorrect credentials / no such user (${login})`
-      }
-    })
-  }
+export const userLogin = (credentials) => dispatch => {
+  api.signInUser(credentials).then(
+    result => {
+      dispatch({
+        type: USER_APPLY,
+        payload: result.data.signInUser
+      })
+    },
+    errorData => {
+      dispatch({
+        type: SET_SIGN_IN_ERRORS,
+        payload: {
+          errors: errorData.graphQLErrors.map(error => error.message)
+        }
+      })
+    }
+  )
 }
 
 export const userLogout = () => ({
@@ -38,7 +40,7 @@ export const userRegister = (creds) => dispatch => {
     })
   } else {
     dispatch({
-      type: ADD_SIGN_UP_ERROR,
+      type: SET_SIGN_UP_ERRORS,
       payload: {
         error: 'Incorrect credentials / user already exists'
       }

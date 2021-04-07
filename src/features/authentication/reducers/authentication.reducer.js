@@ -1,15 +1,15 @@
-import { USER_SIGN_OUT, USER_APPLY, ADD_SIGN_IN_ERROR, ADD_SIGN_UP_ERROR } from '../actions/authentication.actions'
+import { persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage'
+import { USER_SIGN_OUT, USER_APPLY, SET_SIGN_IN_ERRORS, SET_SIGN_UP_ERRORS } from '../actions/authentication.actions'
 
 const initialState = {}
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_APPLY: {
-      const { login, email } = action.payload
       return {
         active: true,
-        login,
-        email
+        ...action.payload
       }
     }
     case USER_SIGN_OUT: {
@@ -17,14 +17,14 @@ const authReducer = (state = initialState, action) => {
         active: false,
       }
     }
-    case ADD_SIGN_IN_ERROR: {
+    case SET_SIGN_IN_ERRORS: {
       return {
-        signInError: action.payload.error
+        signInErrors: action.payload.errors
       }
     }
-    case ADD_SIGN_UP_ERROR: {
+    case SET_SIGN_UP_ERRORS: {
       return {
-        signUpError: action.payload.error
+        signUpErrors: action.payload.errors
       }
     }
     default: {
@@ -33,4 +33,13 @@ const authReducer = (state = initialState, action) => {
   }
 }
 
-export default authReducer;
+const persistConfig = {
+  key: 'authentication',
+  storage: AsyncStorage,
+  blacklist: [
+    'signInErrors',
+    'signUpErrors',
+  ]
+};
+
+export default persistReducer(persistConfig, authReducer);
