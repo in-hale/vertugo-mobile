@@ -24,10 +24,10 @@ const SignUp = ({ navigation, errors = [], registerUser }) => {
       <AuthenticationView>
         <Logo style={{ paddingBottom: 50 }} />
         <View style={{ width: '80%' }}>
+          <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} keyboardType='email-address' />
           <AuthenticationInput placeholder="Login" onChangeText={setLogin} value={login} />
-          <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} />
-          <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} />
-          <AuthenticationPasswordInput placeholder="Repeat password" onChangeText={setRepeatedPassword} value={repeatedPassword} />
+          <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} textContentType='newPassword' />
+          <AuthenticationPasswordInput placeholder="Repeat password" onChangeText={setRepeatedPassword} value={repeatedPassword} textContentType='newPassword' />
           <AuthenticationErrors errors={errors} />
           <AuthenticationButton title='Sign up' onPress={() => {
             registerUser({ login, email, password, repeatedPassword })

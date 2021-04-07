@@ -23,8 +23,8 @@ const SignIn = ({ navigation, loginUser, errors = [] }) => {
       <AuthenticationView>
         <Logo style={{ paddingBottom: 50 }} />
         <View style={{ width: '80%' }}>
-          <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} />
-          <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} />
+          <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} keyboardType='email-address' />
+          <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} textContentType='password' />
           <AuthenticationErrors errors={errors} />
           <AuthenticationButton title='Sign in' onPress={() => loginUser({ email, password })} />
           <AuthenticationFooter label="Don't have an account yet?"
