@@ -31,21 +31,36 @@ export const userLogout = () => ({
   payload: {},
 })
 
-export const userRegister = (creds) => dispatch => {
-  if (creds.login == 'kek' && creds.password == 'lol') {
-    dispatch({
-      type: USER_APPLY,
-      payload: {
-        login: creds.login,
-        email: creds.email
-      }
-    })
-  } else {
+export const userRegister = (credentials) => dispatch => {
+  if (credentials.password != credentials.repeatedPassword) {
     dispatch({
       type: SET_SIGN_UP_ERRORS,
       payload: {
-        error: 'Incorrect credentials / user already exists'
+        errors: [
+          'Passwords do not match'
+        ]
       }
     })
+    return;
   }
+
+  const { repeatedPassword, ...credsForSignUp } = credentials
+
+  api.signUpUser(credsForSignUp).then(
+    result => {
+      dispatch({
+        type: USER_APPLY,
+        payload: result.data.signUpUser
+      })
+      AsyncStorage.setItem('api_token', result.data.signUpUser.token)
+    },
+    errorData => {
+      dispatch({
+        type: SET_SIGN_UP_ERRORS,
+        payload: {
+          errors: errorData.graphQLErrors.map(error => error.message)
+        }
+      })
+    }
+  )
 }

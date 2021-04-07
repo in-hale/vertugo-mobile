@@ -9,7 +9,7 @@ import {
   AuthenticationInput,
   AuthenticationButton,
   AuthenticationFooter,
-  AuthenticationError,
+  AuthenticationErrors,
   AuthenticationPasswordInput
 } from '../helpers'
 import { userLogin } from '../../actions/authentication.actions'
@@ -25,9 +25,7 @@ const SignIn = ({ navigation, loginUser, errors = [] }) => {
         <View style={{ width: '80%' }}>
           <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} />
           <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} />
-          {
-            errors.map(error => <AuthenticationError title={error} />)
-          }
+          <AuthenticationErrors errors={errors} />
           <AuthenticationButton title='Sign in' onPress={() => loginUser({ email, password })} />
           <AuthenticationFooter label="Don't have an account yet?"
                                 title='Sign up'

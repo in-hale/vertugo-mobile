@@ -25,3 +25,27 @@ export const signInUser = (credentials) => {
   })
 }
 
+export const signUpUser = ({ login, ...credentials }) => {
+  const variables = { credentials, login }
+  const mutation = gql`
+    mutation SignUpUser($credentials: AUTH_CREDENTIALS!, $login: String!) {
+      signUpUser(
+        input: {
+          credentials: $credentials,
+          login: $login
+        }
+      ) {
+        user {
+          id
+          login
+          email
+        }
+        token
+      }
+    }
+  `
+
+  return client.mutate({
+    mutation, variables
+  })
+}

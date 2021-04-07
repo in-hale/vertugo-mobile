@@ -40,13 +40,18 @@ export const AuthenticationButton = ({ title, onPress }) => (
   <Button title={title} onPress={onPress} size={10} style={{}} />
 )
 
-export const AuthenticationError = ({ title }) => (
-  <Text style={{
-    color: 'red',
+export const AuthenticationErrors = ({ errors }) => (
+  <View style={{
     paddingBottom: 15
   }}>
-    { title }
-  </Text>
+    {errors.map((error, index) => (
+      <Text key={index} style={{
+        color: 'red'
+      }}>
+        { error }
+      </Text>
+    ))}
+  </View>
 )
 
 export const AuthenticationPasswordInput = ({ ...args }) => (

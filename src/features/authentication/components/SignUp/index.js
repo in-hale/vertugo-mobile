@@ -9,11 +9,11 @@ import {
   AuthenticationInput,
   AuthenticationButton,
   AuthenticationFooter,
-  AuthenticationPasswordInput, AuthenticationError
+  AuthenticationPasswordInput, AuthenticationErrors
 } from '../helpers'
 import { userRegister } from "../../actions/authentication.actions";
 
-const SignUp = ({ navigation, error, registerUser }) => {
+const SignUp = ({ navigation, errors = [], registerUser }) => {
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +28,7 @@ const SignUp = ({ navigation, error, registerUser }) => {
           <AuthenticationInput placeholder="Email" onChangeText={setEmail} value={email} />
           <AuthenticationPasswordInput placeholder="Password" onChangeText={setPassword} value={password} />
           <AuthenticationPasswordInput placeholder="Repeat password" onChangeText={setRepeatedPassword} value={repeatedPassword} />
-          <AuthenticationError title={error} />
+          <AuthenticationErrors errors={errors} />
           <AuthenticationButton title='Sign up' onPress={() => {
             registerUser({ login, email, password, repeatedPassword })
           }} />
@@ -42,7 +42,7 @@ const SignUp = ({ navigation, error, registerUser }) => {
 }
 
 const mapStateToProps = (state) => ({
-  error: state.authentication.signUpErrors
+  errors: state.authentication.signUpErrors
 })
 
 const mapDispatchToProps = (dispatch) => ({

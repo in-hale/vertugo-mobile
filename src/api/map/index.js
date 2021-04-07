@@ -43,3 +43,67 @@ export const getPlacePreview = (id) => {
     query, variables
   })
 }
+
+export const getPlace = (id) => {
+  const variables = { filters: { id: id } }
+  const query = gql`
+    query GetOverviewPins($filters: PlaceFilter) {
+      allPlaces(filters: $filters) {
+        id
+        name
+        rating
+        reviewsCount
+        imageUrls
+        isFavourite
+        reviews {
+          id
+          text
+          user {
+            login
+          }
+        }
+        telephoneNumber
+        location {
+          latitude
+          longitude
+        }
+        mealCategories {
+          id
+          name
+          meals {
+            id
+            name
+            price
+            currency
+          }
+        }
+      }
+    }
+  `
+
+  return client.query({
+    query, variables
+  })
+}
+
+export const getFavourites = () => {
+  const variables = {
+    filters: {
+      isFavourite: true
+    }
+  }
+  const query = gql`
+    query GetOverviewPins($filters: PlaceFilter) {
+      allPlaces(filters: $filters) {
+        id
+        name
+        rating
+        reviewsCount
+      }
+    }
+  `
+
+  return client.query({
+    query, variables
+  })
+}

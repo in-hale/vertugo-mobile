@@ -6,7 +6,8 @@ import Logo from "../../../../components/Logo";
 import SideMenuUserInfo from "../SideMenuUserInfo";
 import PageView from "../../../../components/PageView";
 import { Icon } from "react-native-elements";
-import {userLogout} from "../../../authentication/actions/authentication.actions";
+import { userLogout } from "../../../authentication/actions/authentication.actions";
+import { closePreview } from "../../actions/map.actions";
 
 const MenuItem = ({ title, icon, style, onPress }) => {
   return (
@@ -36,7 +37,10 @@ const LogOutButtonComponent = ({ logoutUser }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(userLogout())
+  logoutUser: () => {
+    dispatch(userLogout())
+    dispatch(closePreview())
+  }
 })
 
 const LogOutButton = connect(null, mapDispatchToProps)(LogOutButtonComponent)
