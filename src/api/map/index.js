@@ -58,6 +58,7 @@ export const getPlace = (id) => {
         reviews {
           id
           text
+          rating
           user {
             login
           }
