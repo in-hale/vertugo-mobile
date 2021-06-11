@@ -1,22 +1,24 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from "react-redux";
-import { Text, TouchableOpacity, View, Alert } from 'react-native';
-import Logo from "../../../../components/Logo";
-import SideMenuUserInfo from "../SideMenuUserInfo";
-import PageView from "../../../../components/PageView";
-import { Icon } from "react-native-elements";
-import { userLogout } from "../../../authentication/actions/authentication.actions";
-import { closePreview } from "../../actions/map.actions";
+import { connect } from 'react-redux';
+import {
+  Text, TouchableOpacity, View, Alert,
+} from 'react-native';
+import { Icon } from 'react-native-elements';
+import Logo from '../../../../components/Logo';
+import SideMenuUserInfo from '../SideMenuUserInfo';
+import PageView from '../../../../components/PageView';
+import { userLogout } from '../../../authentication/actions/authentication.actions';
+import { closePreview } from '../../actions/map.actions';
 
-const MenuItem = ({ title, icon, style, onPress }) => {
-  return (
-    <TouchableOpacity style={{ ...styles.menuItem, ...style }} onPress={onPress}>
-      <Icon name={icon} type='material-community' size={35} />
-      <Text style={styles.menuItemText}>{title}</Text>
-    </TouchableOpacity>
-  )
-}
+const MenuItem = ({
+  title, icon, style, onPress,
+}) => (
+  <TouchableOpacity style={{ ...styles.menuItem, ...style }} onPress={onPress}>
+    <Icon name={icon} type="material-community" size={35} />
+    <Text style={styles.menuItemText}>{title}</Text>
+  </TouchableOpacity>
+);
 
 const LogOutButtonComponent = ({ logoutUser }) => {
   const showLogOutAlert = () => (
@@ -25,31 +27,38 @@ const LogOutButtonComponent = ({ logoutUser }) => {
       'You will be logged out from your account',
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: "OK", onPress: logoutUser }
-      ]
+        { text: 'OK', onPress: logoutUser },
+      ],
     )
-  )
+  );
 
-  return <MenuItem title='Log out' style={{
-    position: 'absolute',
-    bottom: 20
-  }} icon='logout' onPress={showLogOutAlert} />
-}
+  return (
+    <MenuItem
+      title="Log out"
+      style={{
+        position: 'absolute',
+        bottom: 20,
+      }}
+      icon="logout"
+      onPress={showLogOutAlert}
+    />
+  );
+};
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   logoutUser: () => {
-    dispatch(userLogout())
-    dispatch(closePreview())
-  }
-})
+    dispatch(userLogout());
+    dispatch(closePreview());
+  },
+});
 
-const LogOutButton = connect(null, mapDispatchToProps)(LogOutButtonComponent)
+const LogOutButton = connect(null, mapDispatchToProps)(LogOutButtonComponent);
 
 const SideMenu = ({ navigation }) => {
-  const navigate = screen => {
+  const navigate = (screen) => {
     navigation.navigate(screen);
     navigation.closeDrawer();
-  }
+  };
 
   return (
     <PageView>
@@ -59,14 +68,14 @@ const SideMenu = ({ navigation }) => {
         <SideMenuUserInfo />
 
         <View style={styles.menuView}>
-          <MenuItem title='Filters' icon='filter' onPress={() => { navigate('Filters') } } />
-          <MenuItem title='Favourites' icon='heart' onPress={() => { navigate('Favourites') } } />
+          <MenuItem title="Filters" icon="filter" onPress={() => { navigate('Filters'); }} />
+          <MenuItem title="Favourites" icon="heart" onPress={() => { navigate('Favourites'); }} />
           <LogOutButton />
         </View>
       </View>
     </PageView>
   );
-}
+};
 
 const styles = {
   container: {
@@ -82,7 +91,7 @@ const styles = {
   },
   userIconContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   menuItem: {
     flexDirection: 'row',
@@ -94,12 +103,12 @@ const styles = {
   menuItemText: {
     fontSize: 20,
     paddingLeft: 10,
-    fontWeight: '600'
-  }
+    fontWeight: '600',
+  },
 };
 
 SideMenu.propTypes = {
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
 };
 
 export default SideMenu;

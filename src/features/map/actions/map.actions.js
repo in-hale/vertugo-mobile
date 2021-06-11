@@ -1,85 +1,85 @@
-import { navigate, mapZoomToLocationWithOffset } from "../../../navigation/rootNavigation";
-import * as api from "../../../api/map";
+import { navigate, mapZoomToLocationWithOffset } from '../../../navigation/rootNavigation';
+import * as api from '../../../api/map';
 
-export const MAP_PREVIEW_PLACE = 'MAP_PREVIEW_PLACE'
-export const MAP_CLOSE_PREVIEW = 'MAP_CLOSE_PREVIEW'
-export const LOAD_OVERVIEW_PINS = 'LOAD_OVERVIEW_PINS'
-export const VIEW_PLACE = 'VIEW_PLACE'
-export const LOAD_FAVOURITES = 'LOAD_FAVOURITES'
-export const SET_FILTERS = 'SET_FILTERS'
-export const UPDATE_ADS = 'UPDATE_ADS'
+export const MAP_PREVIEW_PLACE = 'MAP_PREVIEW_PLACE';
+export const MAP_CLOSE_PREVIEW = 'MAP_CLOSE_PREVIEW';
+export const LOAD_OVERVIEW_PINS = 'LOAD_OVERVIEW_PINS';
+export const VIEW_PLACE = 'VIEW_PLACE';
+export const LOAD_FAVOURITES = 'LOAD_FAVOURITES';
+export const SET_FILTERS = 'SET_FILTERS';
+export const UPDATE_ADS = 'UPDATE_ADS';
 
-export const previewPlace = (id) => dispatch => {
-  api.getPlacePreview(id).then(result => {
-    const selectedPlace = result.data.allPlaces[0]
+export const previewPlace = (id) => (dispatch) => {
+  api.getPlacePreview(id).then((result) => {
+    const selectedPlace = result.data.allPlaces[0];
 
     dispatch({
       type: MAP_PREVIEW_PLACE,
-      payload: selectedPlace
-    })
-    navigate('HomeMap')
+      payload: selectedPlace,
+    });
+    navigate('HomeMap');
     mapZoomToLocationWithOffset(selectedPlace.location, {
       x: 0,
-      y: -0.004
-    })
-  })
-}
+      y: -0.004,
+    });
+  });
+};
 
 export const closePreview = () => ({
   type: MAP_CLOSE_PREVIEW,
   payload: {},
-})
+});
 
-export const loadOverviewPins = filters => dispatch => {
+export const loadOverviewPins = (filters) => (dispatch) => {
   const apiFriendlyFilters = Object.fromEntries(
-    filters.map(f => [f.name, f.value])
-  )
+    filters.map((f) => [f.name, f.value]),
+  );
 
-  api.getOverviewPins(apiFriendlyFilters).then(result => {
+  api.getOverviewPins(apiFriendlyFilters).then((result) => {
     dispatch({
       type: LOAD_OVERVIEW_PINS,
       payload: {
-        overviewPins: result.data.allPlaces
-      }
+        overviewPins: result.data.allPlaces,
+      },
     });
     dispatch({
       type: UPDATE_ADS,
-      payload: {}
-    })
-  })
-}
+      payload: {},
+    });
+  });
+};
 
-export const viewPlace = id => dispatch => {
-  api.getPlace(id).then(result => {
-    const selectedPlace = result.data.allPlaces[0]
+export const viewPlace = (id) => (dispatch) => {
+  api.getPlace(id).then((result) => {
+    const selectedPlace = result.data.allPlaces[0];
 
     dispatch({
       type: VIEW_PLACE,
-      payload: selectedPlace
-    })
-    navigate('PlaceView')
-  })
-}
+      payload: selectedPlace,
+    });
+    navigate('PlaceView');
+  });
+};
 
-export const loadFavourites = () => dispatch => {
-  api.getFavourites().then(result => {
+export const loadFavourites = () => (dispatch) => {
+  api.getFavourites().then((result) => {
     dispatch({
       type: LOAD_FAVOURITES,
       payload: {
-        favourites: result.data.allPlaces
-      }
-    })
-  })
-}
+        favourites: result.data.allPlaces,
+      },
+    });
+  });
+};
 
-export const setFilters = filters => ({
+export const setFilters = (filters) => ({
   type: SET_FILTERS,
   payload: {
-    filters
-  }
-})
+    filters,
+  },
+});
 
 export const updateAds = () => ({
   type: UPDATE_ADS,
-  payload: {}
-})
+  payload: {},
+});

@@ -1,8 +1,8 @@
-import { client } from "../client";
 import { gql } from '@apollo/client';
+import { client } from '../client';
 
 export const getOverviewPins = (filters) => {
-  const variables = { filters }
+  const variables = { filters };
   const query = gql`
     query GetOverviewPins($filters: PlaceFilter) {
       allPlaces(filters: $filters) {
@@ -20,15 +20,15 @@ export const getOverviewPins = (filters) => {
         }
       }
     }
-  `
+  `;
 
   return client.query({
-    query, variables
-  })
-}
+    query, variables,
+  });
+};
 
 export const getPlacePreview = (id) => {
-  const variables = { filters: { id: id } }
+  const variables = { filters: { id } };
   const query = gql`
     query GetOverviewPins($filters: PlaceFilter) {
       allPlaces(filters: $filters) {
@@ -44,15 +44,15 @@ export const getPlacePreview = (id) => {
         }
       }
     }
-  `
+  `;
 
   return client.query({
-    query, variables
-  })
-}
+    query, variables,
+  });
+};
 
 export const getPlace = (id) => {
-  const variables = { filters: { id: id } }
+  const variables = { filters: { id } };
   const query = gql`
     query GetOverviewPins($filters: PlaceFilter) {
       allPlaces(filters: $filters) {
@@ -87,19 +87,19 @@ export const getPlace = (id) => {
         }
       }
     }
-  `
+  `;
 
   return client.query({
-    query, variables
-  })
-}
+    query, variables,
+  });
+};
 
 export const getFavourites = () => {
   const variables = {
     filters: {
-      isFavourite: true
-    }
-  }
+      isFavourite: true,
+    },
+  };
   const query = gql`
     query GetOverviewPins($filters: PlaceFilter) {
       allPlaces(filters: $filters) {
@@ -109,9 +109,9 @@ export const getFavourites = () => {
         reviewsCount
       }
     }
-  `
+  `;
 
   return client.query({
-    query, variables
-  })
-}
+    query, variables,
+  });
+};

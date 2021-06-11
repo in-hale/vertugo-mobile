@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
-import { connect } from "react-redux";
-import {ScrollView, StyleSheet, Text, View, Linking} from "react-native";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import {
+  ScrollView, StyleSheet, Text, View, Linking,
+} from 'react-native';
 
-import PageView from "../../../../components/PageView";
-import ImageSlider from "../ImageSlider";
-import PlaceRating from "../PlaceRating";
-import PressableIcon from "../../../../components/PressableIcon";
-import { previewPlace } from "../../actions/map.actions";
-import Button from "../../../../components/Button";
-import CategorizedMenuItems from "../CategorizedMenuItems";
-import Reviews from "../Reviews";
-import AddReviewModal from "../AddReviewModal";
-
+import PageView from '../../../../components/PageView';
+import ImageSlider from '../ImageSlider';
+import PlaceRating from '../PlaceRating';
+import PressableIcon from '../../../../components/PressableIcon';
+import { previewPlace } from '../../actions/map.actions';
+import Button from '../../../../components/Button';
+import CategorizedMenuItems from '../CategorizedMenuItems';
+import Reviews from '../Reviews';
+import AddReviewModal from '../AddReviewModal';
 
 const PlaceView = ({ place, placePreview }) => {
   const [isAddReviewModalVisible, setAddReviewModalVisibility] = useState(false);
@@ -23,11 +24,11 @@ const PlaceView = ({ place, placePreview }) => {
         <View style={styles.container}>
           <View style={styles.ratingAndActionsContainer}>
             <PlaceRating reviewsCount={place.reviewsCount} rating={place.rating} />
-            <View style={styles.actions} >
+            <View style={styles.actions}>
               {place.telephoneNumber
-                  ? <PressableIcon name='phone' size={35} onPress={() => { Linking.openURL(`tel:${place.telephoneNumber}`) }}  />
-                  : null}
-              <PressableIcon name='map-marker' size={35} onPress={() => { placePreview(place.id) }} color='red' />
+                ? <PressableIcon name="phone" size={35} onPress={() => { Linking.openURL(`tel:${place.telephoneNumber}`); }} />
+                : null}
+              <PressableIcon name="map-marker" size={35} onPress={() => { placePreview(place.id); }} color="red" />
             </View>
           </View>
           <View style={styles.pageSectionContainer}>
@@ -40,9 +41,14 @@ const PlaceView = ({ place, placePreview }) => {
           <View style={{ ...styles.pageSectionContainer, borderBottomWidth: 0 }}>
             <View style={styles.pageSectionTitleContainer}>
               <Text style={styles.pageSectionTitle}>Reviews</Text>
-              <Button style={{
-                marginLeft: 10,
-              }} title='Add' size={10} onPress={() => { setAddReviewModalVisibility(true) }} />
+              <Button
+                style={{
+                  marginLeft: 10,
+                }}
+                title="Add"
+                size={10}
+                onPress={() => { setAddReviewModalVisibility(true); }}
+              />
             </View>
 
             <Reviews reviews={place.reviews} />
@@ -52,7 +58,7 @@ const PlaceView = ({ place, placePreview }) => {
       <AddReviewModal onRequestClose={() => setAddReviewModalVisibility(false)} visible={isAddReviewModalVisible} />
     </PageView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 10
+    margin: 10,
   },
   actions: {
     flexDirection: 'row',
@@ -77,20 +83,20 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     paddingBottom: 10,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   pageSectionTitle: {
     fontSize: 25,
     fontWeight: '600',
-  }
+  },
 });
 
-const mapStateToProps = state => ({
-  place: state.map.viewedPlace
-})
+const mapStateToProps = (state) => ({
+  place: state.map.viewedPlace,
+});
 
-const mapDispatchToProps = dispatch => ({
-  placePreview: (id) => dispatch(previewPlace(id))
-})
+const mapDispatchToProps = (dispatch) => ({
+  placePreview: (id) => dispatch(previewPlace(id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaceView);

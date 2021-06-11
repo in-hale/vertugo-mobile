@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
-import { viewPlace } from "../../actions/map.actions";
+import {
+  StyleSheet, Text, TouchableWithoutFeedback, View,
+} from 'react-native';
+import { viewPlace } from '../../actions/map.actions';
 
 const AdContent = ({ text, onPress }) => (
   <TouchableWithoutFeedback onPress={onPress}>
@@ -10,11 +12,11 @@ const AdContent = ({ text, onPress }) => (
       <Text style={styles.text}>{ text }</Text>
     </View>
   </TouchableWithoutFeedback>
-)
+);
 
 const AdPanel = ({ currentAd, placeView }) => (
   (currentAd || null) && <AdContent text={currentAd.text} onPress={() => placeView(currentAd.place.id)} />
-)
+);
 
 const styles = StyleSheet.create({
   adsContainer: {
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'orange'
+    backgroundColor: 'orange',
   },
   text: {
     fontSize: 30,
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     // textShadowColor: 'white',
     // textShadowOffset: {width: -1, height: 1},
     // textShadowRadius: 1
-  }
+  },
 });
 
 AdPanel.propTypes = {
@@ -38,10 +40,10 @@ AdPanel.propTypes = {
     id: PropTypes.string,
     text: PropTypes.string,
     place: PropTypes.shape({
-      id: PropTypes.string
-    })
-  })
-}
+      id: PropTypes.string,
+    }),
+  }),
+};
 //
 // AdPanel.defaultProps = {
 //   currentAd: {
@@ -53,12 +55,12 @@ AdPanel.propTypes = {
 //   }
 // }
 
-const mapStateToProps = state => ({
-  currentAd: state.map.currentAd
-})
+const mapStateToProps = (state) => ({
+  currentAd: state.map.currentAd,
+});
 
-const mapDispatchToProps = dispatch => ({
-  placeView: (id) => dispatch(viewPlace(id))
-})
+const mapDispatchToProps = (dispatch) => ({
+  placeView: (id) => dispatch(viewPlace(id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdPanel);

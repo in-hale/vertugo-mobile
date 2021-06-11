@@ -1,21 +1,19 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { backgroundColor } from "../../styles";
+import { backgroundColor } from '../../styles';
 
-const PageView = ({ children, style }) => {
-  return (
-    <View style={{...styles.container, ...style}}>
-      { children }
-    </View>
-  );
-};
+const PageView = ({ children, style }) => (
+  <View style={{ ...styles.container, ...style }}>
+    { children }
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: backgroundColor
-  }
+    backgroundColor,
+  },
 });
 
 export default PageView;

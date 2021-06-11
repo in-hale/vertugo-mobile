@@ -1,16 +1,14 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import MapView from "react-native-maps";
+import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
-import { mapZoomToLocation, mapRef } from "../../../../navigation/rootNavigation";
+import { mapZoomToLocation, mapRef } from '../../../../navigation/rootNavigation';
 
 const Map = ({ children }) => {
-  const getCurrentLocation = () => {
-    return new Promise((resolve, reject) => {
-      Geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
-    });
-  };
+  const getCurrentLocation = () => new Promise((resolve, reject) => {
+    Geolocation.getCurrentPosition((position) => resolve(position), (e) => reject(e));
+  });
 
   return (
     <MapView
@@ -18,8 +16,8 @@ const Map = ({ children }) => {
       showsUserLocation
       ref={mapRef}
       onMapReady={() => {
-        getCurrentLocation().then(({coords}) => (mapZoomToLocation(coords)), () => {
-        })
+        getCurrentLocation().then(({ coords }) => (mapZoomToLocation(coords)), () => {
+        });
       }}
       initialRegion={{
         latitude: 53.908200,
@@ -31,13 +29,13 @@ const Map = ({ children }) => {
       { children }
     </MapView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
-    marginBottom: 0
-  }
+    marginBottom: 0,
+  },
 });
 
 export default Map;

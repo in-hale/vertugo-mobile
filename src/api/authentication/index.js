@@ -1,8 +1,8 @@
-import { client } from "../client";
 import { gql } from '@apollo/client';
+import { client } from '../client';
 
 export const signInUser = (credentials) => {
-  const variables = { credentials }
+  const variables = { credentials };
   const mutation = gql`
     mutation SignInUser($credentials: AUTH_CREDENTIALS) {
       signInUser(
@@ -18,15 +18,15 @@ export const signInUser = (credentials) => {
         token
       }
     }
-  `
+  `;
 
   return client.mutate({
-    mutation, variables
-  })
-}
+    mutation, variables,
+  });
+};
 
 export const signUpUser = ({ login, ...credentials }) => {
-  const variables = { credentials, login }
+  const variables = { credentials, login };
   const mutation = gql`
     mutation SignUpUser($credentials: AUTH_CREDENTIALS!, $login: String!) {
       signUpUser(
@@ -43,9 +43,9 @@ export const signUpUser = ({ login, ...credentials }) => {
         token
       }
     }
-  `
+  `;
 
   return client.mutate({
-    mutation, variables
-  })
-}
+    mutation, variables,
+  });
+};

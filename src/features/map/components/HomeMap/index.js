@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import MapPin from "../MapPin";
-import Map from "../Map";
-import PlacePreviewPanel from "../PlacePreviewPanel";
-import {previewPlace, closePreview, loadOverviewPins, viewPlace, updateAds} from "../../actions/map.actions"
-import PressableIcon from "../../../../components/PressableIcon";
-import AdPanel from "../AdPanel";
+import MapPin from '../MapPin';
+import Map from '../Map';
+import PlacePreviewPanel from '../PlacePreviewPanel';
+import {
+  previewPlace, closePreview, loadOverviewPins, viewPlace, updateAds,
+} from '../../actions/map.actions';
+import PressableIcon from '../../../../components/PressableIcon';
+import AdPanel from '../AdPanel';
 
 const OverlayIcons = ({ children }) => {
   const xOffset = 15;
@@ -18,29 +20,32 @@ const OverlayIcons = ({ children }) => {
     size: 40,
     color: 'black',
     style: {
-      paddingBottom: 10
-    }
-  }
+      paddingBottom: 10,
+    },
+  };
 
   return (
     <View style={{
       position: 'absolute',
       flexDirection: 'column',
       top: yOffset,
-      left: xOffset
-    }} >
+      left: xOffset,
+    }}
+    >
       {
-        children.map(child => React.cloneElement(child, {
+        children.map((child) => React.cloneElement(child, {
           key: child.props.name,
           ...sharedIconProps,
-          ...child.props
+          ...child.props,
         }))
       }
     </View>
   );
 };
 
-const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView, filters, adsUpdate }) => {
+const HomeMap = ({
+  navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView, filters, adsUpdate,
+}) => {
   useEffect(() => {
     overviewPinsLoad(filters);
     // adsUpdate();
@@ -50,31 +55,29 @@ const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, pl
     <View style={styles.screenContainer}>
       <View style={styles.contentContainer}>
         <Map>
-          {overviewPins.map(pin =>
-            <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />
-          )}
+          {overviewPins.map((pin) => <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />)}
         </Map>
-        <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { placeView(previewedPlace.id) }} />
+        <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { placeView(previewedPlace.id); }} />
         <OverlayIcons>
-          <PressableIcon name='menu' onPress={() => { navigation.openDrawer() }} />
-          <PressableIcon name='filter' onPress={() => { navigation.navigate('Filters') }} />
+          <PressableIcon name="menu" onPress={() => { navigation.openDrawer(); }} />
+          <PressableIcon name="filter" onPress={() => { navigation.navigate('Filters'); }} />
         </OverlayIcons>
       </View>
       <AdPanel />
     </View>
   );
-}
+};
 
-let {height, width} = Dimensions.get('window')
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   screenContainer: {
-    height: height,
-    width: width,
+    height,
+    width,
     flexDirection: 'column',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   contentContainer: {
-    flexGrow: 1
+    flexGrow: 1,
   },
 });
 
@@ -84,28 +87,28 @@ HomeMap.propTypes = {
   overviewPins: PropTypes.array,
   placePreview: PropTypes.func.isRequired,
   previewClose: PropTypes.func.isRequired,
-  overviewPinsLoad: PropTypes.func.isRequired
-}
+  overviewPinsLoad: PropTypes.func.isRequired,
+};
 
 HomeMap.defaultProps = {
   isPreviewActive: false,
   previewedPlace: undefined,
-  overviewPins: []
-}
+  overviewPins: [],
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isPreviewActive: state.map.isPreviewActive,
   previewedPlace: state.map.previewedPlace,
   overviewPins: state.map.overviewPins,
-  filters: state.map.filters
-})
+  filters: state.map.filters,
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   placePreview: (id) => dispatch(previewPlace(id)),
   previewClose: () => dispatch(closePreview()),
   overviewPinsLoad: (filters) => dispatch(loadOverviewPins(filters)),
   placeView: (id) => dispatch(viewPlace(id)),
-  adsUpdate: () => dispatch(updateAds())
-})
+  adsUpdate: () => dispatch(updateAds()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeMap);
