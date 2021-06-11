@@ -4,7 +4,8 @@ import {
   LOAD_OVERVIEW_PINS,
   VIEW_PLACE,
   LOAD_FAVOURITES,
-  SET_FILTERS
+  SET_FILTERS,
+  UPDATE_ADS
 } from "../actions/map.actions";
 
 const initialState = {
@@ -62,6 +63,17 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         filters: action.payload.filters
+      }
+    }
+    case UPDATE_ADS: {
+      const ads = state.overviewPins.map(pin => pin.advertisements).flat().filter(e => e)
+      const currentAd = state.currentAd || ads[ads.length - 1];
+      const currentAdIndex = ads.findIndex(ad => ad.id === currentAd.id)
+      const nextAdIndex = currentAdIndex + 1 >= ads.length ? 0 : currentAdIndex + 1
+
+      return {
+        ...state,
+        currentAd: ads[nextAdIndex]
       }
     }
     default: {

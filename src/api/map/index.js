@@ -11,6 +11,13 @@ export const getOverviewPins = (filters) => {
           latitude
           longitude
         }
+        advertisements {
+          id
+          text
+          place {
+            id
+          }
+        }
       }
     }
   `

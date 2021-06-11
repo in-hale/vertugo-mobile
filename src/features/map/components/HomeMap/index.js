@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 import MapPin from "../MapPin";
 import Map from "../Map";
 import PlacePreviewPanel from "../PlacePreviewPanel";
-import { previewPlace, closePreview, loadOverviewPins, viewPlace } from "../../actions/map.actions"
+import {previewPlace, closePreview, loadOverviewPins, viewPlace, updateAds} from "../../actions/map.actions"
 import PressableIcon from "../../../../components/PressableIcon";
+import AdPanel from "../AdPanel";
 
 const OverlayIcons = ({ children }) => {
   const xOffset = 15;
@@ -39,31 +40,42 @@ const OverlayIcons = ({ children }) => {
   );
 };
 
-const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView, filters }) => {
-  useEffect(() => overviewPinsLoad(filters), [filters]);
+const HomeMap = ({ navigation, isPreviewActive, previewedPlace, overviewPins, placePreview, previewClose, overviewPinsLoad, placeView, filters, adsUpdate }) => {
+  useEffect(() => {
+    overviewPinsLoad(filters);
+    // adsUpdate();
+  }, [filters]);
 
   return (
-    <View style={styles.container}>
-      <Map>
-        {overviewPins.map(pin =>
+    <View style={styles.screenContainer}>
+      <View style={styles.contentContainer}>
+        <Map>
+          {overviewPins.map(pin =>
             <MapPin coordinate={pin.location} onPress={() => placePreview(pin.id)} key={pin.id} isSelected={pin.isSelected} />
-        )}
-      </Map>
-      <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { placeView(previewedPlace.id) }} />
-      <OverlayIcons>
-        <PressableIcon name='menu' onPress={() => { navigation.openDrawer() }} />
-        <PressableIcon name='filter' onPress={() => { navigation.navigate('Filters') }} />
-      </OverlayIcons>
+          )}
+        </Map>
+        <PlacePreviewPanel isActive={isPreviewActive} place={previewedPlace} onClose={previewClose} onPress={() => { placeView(previewedPlace.id) }} />
+        <OverlayIcons>
+          <PressableIcon name='menu' onPress={() => { navigation.openDrawer() }} />
+          <PressableIcon name='filter' onPress={() => { navigation.navigate('Filters') }} />
+        </OverlayIcons>
+      </View>
+      <AdPanel />
     </View>
   );
 }
 
 let {height, width} = Dimensions.get('window')
 const styles = StyleSheet.create({
-  container: {
+  screenContainer: {
     height: height,
     width: width,
-  }
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  },
+  contentContainer: {
+    flexGrow: 1
+  },
 });
 
 HomeMap.propTypes = {
@@ -92,7 +104,8 @@ const mapDispatchToProps = dispatch => ({
   placePreview: (id) => dispatch(previewPlace(id)),
   previewClose: () => dispatch(closePreview()),
   overviewPinsLoad: (filters) => dispatch(loadOverviewPins(filters)),
-  placeView: (id) => dispatch(viewPlace(id))
+  placeView: (id) => dispatch(viewPlace(id)),
+  adsUpdate: () => dispatch(updateAds())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeMap);

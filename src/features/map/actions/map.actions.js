@@ -7,6 +7,7 @@ export const LOAD_OVERVIEW_PINS = 'LOAD_OVERVIEW_PINS'
 export const VIEW_PLACE = 'VIEW_PLACE'
 export const LOAD_FAVOURITES = 'LOAD_FAVOURITES'
 export const SET_FILTERS = 'SET_FILTERS'
+export const UPDATE_ADS = 'UPDATE_ADS'
 
 export const previewPlace = (id) => dispatch => {
   api.getPlacePreview(id).then(result => {
@@ -40,6 +41,10 @@ export const loadOverviewPins = filters => dispatch => {
       payload: {
         overviewPins: result.data.allPlaces
       }
+    });
+    dispatch({
+      type: UPDATE_ADS,
+      payload: {}
     })
   })
 }
@@ -72,4 +77,9 @@ export const setFilters = filters => ({
   payload: {
     filters
   }
+})
+
+export const updateAds = () => ({
+  type: UPDATE_ADS,
+  payload: {}
 })
